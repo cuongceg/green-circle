@@ -14,7 +14,7 @@ class ProductScreen extends StatefulWidget {
   State<ProductScreen> createState() => _ProductScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
+class _ProductScreenState extends State<ProductScreen>{
   int currentImage = 0;
   int currentColor = 0;
   int currentNumber = 1;
@@ -44,15 +44,18 @@ class _ProductScreenState extends State<ProductScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ProductAppBar(),
-              ImageSlider(
-                onChange: (index) {
-                  setState(() {
-                    currentImage = index;
-                  });
-                },
-                currentImage: currentImage,
-                image: widget.product.image,
+              ProductAppBar(cart:currentNumber,),
+              Hero(
+                tag: widget.product.title,
+                child: ImageSlider(
+                  onChange: (index) {
+                    setState(() {
+                      currentImage = index;
+                    });
+                  },
+                  currentImage: currentImage,
+                  image: widget.product.image,
+                ),
               ),
               const SizedBox(height: 10),
               Row(

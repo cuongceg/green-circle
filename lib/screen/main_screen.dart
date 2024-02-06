@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/screen/cart.dart';
 import 'package:green_circle/widgets/nav_bar.dart';
-import 'home.dart';
 
+// TODO(cuongceg): change the size in bottom navigator bar.
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -11,11 +11,11 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 class _MainScreenState extends State<MainScreen> {
-  int currentTab = 2;
+  int currentTab = 0;
   List screens = const [
     NavBar(),
     Scaffold(),
-    HomeScreen(),
+    Scaffold(),
     CartScreen(),
     Scaffold(),
   ];
@@ -31,13 +31,10 @@ class _MainScreenState extends State<MainScreen> {
         },
         shape: const CircleBorder(),
         backgroundColor: green4,
-        child: const Icon(
-          Icons.home,
-          color: Colors.white,
-        ),
+        child: Image.asset("assets/images/scan_icon.png",height:30,width:30,color: Colors.white,)
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar:BottomAppBar(
         elevation: 0,
         height: 70,
         color: lightGray,
@@ -47,14 +44,15 @@ class _MainScreenState extends State<MainScreen> {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: Row(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
               onPressed: () => setState(() {
                 currentTab = 0;
               }),
               icon: Icon(
-                Icons.grid_4x4_rounded,
+                Icons.home,
+                size: 25,
                 color: currentTab == 0 ? green1 : Colors.grey.shade400,
               ),
             ),
@@ -63,7 +61,8 @@ class _MainScreenState extends State<MainScreen> {
                 currentTab = 1;
               }),
               icon: Icon(
-                Icons.heart_broken,
+                Icons.support_agent,
+                size: 25,
                 color: currentTab == 1 ? green1 : Colors.grey.shade400,
               ),
             ),
@@ -72,7 +71,8 @@ class _MainScreenState extends State<MainScreen> {
                 currentTab = 3;
               }),
               icon: Icon(
-                Icons.shopping_cart,
+                Icons.favorite_border_rounded,
+                size: 25,
                 color: currentTab == 3 ? green1 : Colors.grey.shade400,
               ),
             ),
@@ -82,6 +82,7 @@ class _MainScreenState extends State<MainScreen> {
               }),
               icon: Icon(
                 Icons.person,
+                size: 25,
                 color: currentTab == 4 ? green1 : Colors.grey.shade400,
               ),
             ),
@@ -91,4 +92,32 @@ class _MainScreenState extends State<MainScreen> {
       body: screens[currentTab],
     );
   }
+  // overflowed size
+  // Widget labelIcon(IconData icon,int selectedTab,String label){
+  //   return SizedBox(
+  //     height:40,
+  //     child: Expanded(
+  //       child: Column(
+  //         mainAxisAlignment:MainAxisAlignment.start,
+  //         children: [
+  //           IconButton(
+  //             onPressed: () => setState(() {
+  //               currentTab = selectedTab;
+  //             }),
+  //             icon: Icon(
+  //               icon,
+  //               size: 25,
+  //               color: currentTab == selectedTab ? green1 : Colors.grey.shade400,
+  //             ),
+  //           ),
+  //           Text(label,style:GoogleFonts.almarai(
+  //               fontWeight:currentTab == selectedTab ? FontWeight.w700: FontWeight.w300,
+  //             color: currentTab == selectedTab ? green1 : Colors.grey.shade400,
+  //             fontSize: currentTab == selectedTab ? 15 : 12,
+  //           ),)
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }
