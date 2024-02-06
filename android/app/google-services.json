@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "709354686529",
+    "project_id": "green-circle-cfdd9",
+    "storage_bucket": "green-circle-cfdd9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709354686529:android:7e38cdf43bb38ed8e71ec0",
+        "android_client_info": {
+          "package_name": "com.example.green_circle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa710JhAgetfiI9Hfb6A3mlsJ5mcSB5lY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
