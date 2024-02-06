@@ -40,6 +40,7 @@ dependencies:
   firebase_auth: ^4.16.0
   choice: ^2.3.0
   google_fonts: ^6.1.0
+  badges: ^3.1.2
 
 dev_dependencies:
   flutter_test:
