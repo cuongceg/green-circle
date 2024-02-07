@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:badges/badges.dart'as badges;
+import 'package:green_circle/services/share_link.dart';
+import 'package:share_plus/share_plus.dart';
+
 class ProductAppBar extends StatefulWidget {
   final int cart;
   const ProductAppBar({super.key,required this.cart});
@@ -63,7 +66,10 @@ class _ProductAppBarState extends State<ProductAppBar>with SingleTickerProviderS
           ),
           const Spacer(),
           IconButton(
-            onPressed: () {},
+            onPressed: ()async{
+              Uri link=await DynamicLinkService.instance.createDynamicLink();
+              Share.share("Shopping product:$link");
+            },
             style: IconButton.styleFrom(
               backgroundColor: Colors.white,
               padding: const EdgeInsets.all(15),
