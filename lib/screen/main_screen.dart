@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/screen/cart.dart';
 import 'package:green_circle/widgets/nav_bar.dart';
-import 'home.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+// TODO(cuongceg): change the size in bottom navigator bar.
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -11,11 +12,11 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 class _MainScreenState extends State<MainScreen> {
-  int currentTab = 2;
+  int currentTab = 0;
   List screens = const [
     NavBar(),
     Scaffold(),
-    HomeScreen(),
+    Scaffold(),
     CartScreen(),
     Scaffold(),
   ];
@@ -31,64 +32,65 @@ class _MainScreenState extends State<MainScreen> {
         },
         shape: const CircleBorder(),
         backgroundColor: green4,
-        child: const Icon(
-          Icons.home,
-          color: Colors.white,
-        ),
+        child: Image.asset("assets/images/scan_icon.png",height:30,width:30,color: Colors.white,)
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar:BottomAppBar(
         elevation: 0,
-        height: 70,
+        height: 75,
         color: lightGray,
         shape: const CircularNotchedRectangle(),
         shadowColor: mediumGray,
-        notchMargin: 10,
+        notchMargin: 5,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: Row(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            IconButton(
-              onPressed: () => setState(() {
-                currentTab = 0;
-              }),
-              icon: Icon(
-                Icons.grid_4x4_rounded,
-                color: currentTab == 0 ? green1 : Colors.grey.shade400,
-              ),
+            labelIcon(Icons.home_outlined,0,"Home"),
+            Padding(
+              padding: const EdgeInsets.only(left:0,right:40),
+              child: labelIcon(Icons.support_agent,1,"Chat"),
             ),
-            IconButton(
-              onPressed: () => setState(() {
-                currentTab = 1;
-              }),
-              icon: Icon(
-                Icons.heart_broken,
-                color: currentTab == 1 ? green1 : Colors.grey.shade400,
-              ),
+            Padding(
+              padding: const EdgeInsets.only(left:29,right:0),
+              child: labelIcon(Icons.favorite_border_rounded,3,"Likes"),
             ),
-            IconButton(
-              onPressed: () => setState(() {
-                currentTab = 3;
-              }),
-              icon: Icon(
-                Icons.shopping_cart,
-                color: currentTab == 3 ? green1 : Colors.grey.shade400,
-              ),
-            ),
-            IconButton(
-              onPressed: () => setState(() {
-                currentTab = 4;
-              }),
-              icon: Icon(
-                Icons.person,
-                color: currentTab == 4 ? green1 : Colors.grey.shade400,
-              ),
-            ),
+            labelIcon(Icons.person,4,"Profile"),
+            // IconButton(
+            //   onPressed: () => setState(() {
+            //     currentTab = 0;
+            //   }),
+            //   icon: Icon(
+            //     Icons.home,
+            //     size: 25,
+            //     color: currentTab == 0 ? green1 : Colors.grey.shade400,
+            //   ),
+            // ),
           ],
         ),
       ),
       body: screens[currentTab],
+    );
+  }
+
+  Widget labelIcon(IconData icon,int selectedTab,String label){
+    return TextButton.icon(
+      onPressed:(){
+        setState(() {
+          currentTab = selectedTab;
+        });
+      },
+      style:ButtonStyle(
+          iconColor:currentTab==selectedTab?const MaterialStatePropertyAll<Color>(Colors.white):const MaterialStatePropertyAll<Color>(mediumGray),
+          backgroundColor:currentTab==selectedTab?const MaterialStatePropertyAll<Color>(green1):const MaterialStatePropertyAll<Color>(lightGray)
+      ),
+      icon: Icon(icon),
+      label: Text(currentTab==selectedTab?label:"",
+        style:GoogleFonts.almarai(
+            color:currentTab==selectedTab?Colors.white:mediumGray
+        ),
+      ),
     );
   }
 }

@@ -16,4 +16,4 @@ TextStyle heading2Green=GoogleFonts.almarai(fontSize: 20,color:green1,fontWeight
 TextStyle label=GoogleFonts.almarai(fontSize: 15,fontWeight:FontWeight.w700);
 TextStyle price=GoogleFonts.almarai(fontSize: 14,color:green1,fontWeight:FontWeight.w700);
 TextStyle titleProduct=GoogleFonts.almarai(fontSize:13,fontWeight:FontWeight.w700);
-TextStyle title=GoogleFonts.almarai(fontSize:15,fontWeight:FontWeight.w500);
+TextStyle title=GoogleFonts.almarai(fontSize:15,color:green1,fontWeight:FontWeight.w500);

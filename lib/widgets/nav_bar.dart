@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/screen/home.dart';
+import 'package:badges/badges.dart' as badges;
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -20,22 +21,46 @@ class _NavBarState extends State<NavBar> {
             backgroundColor: Colors.white,
             forceMaterialTransparency:true,
             title:IconButton(
-              icon: Image.asset("assets/images/menus_icon.png",height:40,width:40,),
+              icon: const Icon(Icons.menu_outlined,size: 30,),
               onPressed:(){},
             ),
             actions: [
               IconButton(
-                icon: Image.asset("assets/images/search_icon.png",height:30,width:30,),
+                icon: const Icon(Icons.search,size: 30,),
                 onPressed:(){},
               ),
-              IconButton(
-                icon: Image.asset("assets/images/notification_icon.png",height:30,width:30,),
-                onPressed:(){},
+              badges.Badge(
+                position: badges.BadgePosition.topEnd(top: 0, end: 2),
+                badgeAnimation: const badges.BadgeAnimation.slide(
+                  // disappearanceFadeAnimationDuration: Duration(milliseconds: 200),
+                  // curve: Curves.easeInCubic,
+                ),
+                showBadge: true,
+                badgeStyle: const badges.BadgeStyle(
+                  badgeColor: green1,
+                ),
+                badgeContent:const Text(
+                  "2",
+                  style: TextStyle(color: Colors.white),
+                ),
+                child: IconButton(icon: const Icon(Icons.notifications,size: 25,), onPressed: () {}),
               ),
-              IconButton(
-                icon: Image.asset("assets/images/cart_icon.png",height:30,width:30,),
-                onPressed:(){},
-              ),
+              badges.Badge(
+                position: badges.BadgePosition.topEnd(top: 0, end: 2),
+                badgeAnimation: const badges.BadgeAnimation.slide(
+                  // disappearanceFadeAnimationDuration: Duration(milliseconds: 200),
+                  // curve: Curves.easeInCubic,
+                ),
+                showBadge: true,
+                badgeStyle: const badges.BadgeStyle(
+                  badgeColor: green1,
+                ),
+                badgeContent:const Text(
+                  "5",
+                  style: TextStyle(color: Colors.white),
+                ),
+                child: IconButton(icon: const Icon(Icons.shopping_cart,size:25,), onPressed: () {}),
+              )
             ],
             bottom: TabBar(
                 labelColor:Colors.white,
