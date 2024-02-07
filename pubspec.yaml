@@ -41,6 +41,9 @@ dependencies:
   choice: ^2.3.0
   google_fonts: ^6.1.0
   badges: ^3.1.2
+  firebase_dynamic_links: ^5.4.13
+  share_plus: ^7.2.2
+  firebase_analytics: ^10.8.5
 
 dev_dependencies:
   flutter_test:
