@@ -49,7 +49,7 @@ class CartTile extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    item.product.category,
+                    item.product.category.title,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
