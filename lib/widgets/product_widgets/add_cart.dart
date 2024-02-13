@@ -19,7 +19,8 @@ class _AddToCartState extends State<AddToCart> {
     return Container(
       height: 60,
       decoration: BoxDecoration(
-          border: Border.all(color:Colors.black)
+          color: Colors.white,
+          border: Border.all(color:lightGray)
       ),
       child: Row(
         mainAxisAlignment:MainAxisAlignment.start,
@@ -27,7 +28,7 @@ class _AddToCartState extends State<AddToCart> {
           TextButton.icon(
               onPressed:(){},
               icon: const Icon(Icons.chat_outlined,color: green1,),
-              label: const Text("Chat")),
+              label: const Text("Chat",style:TextStyle(color:Colors.black))),
           const VerticalDivider(
             indent: 4,
             endIndent: 4,
@@ -179,7 +180,7 @@ class _AddToCartState extends State<AddToCart> {
                 );
               },
               icon: const Icon(Icons.add_shopping_cart_outlined,color: green1,),
-              label: const Text("Add cart")),
+              label: const Text("Add cart",style:TextStyle(color:Colors.black))),
           Container(
             color:green1,
             width:width/2.3,

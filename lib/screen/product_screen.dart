@@ -18,8 +18,8 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen>{
   int currentImage = 0;
-  int currentColor = 0;
   int currentNumber = 1;
+  bool onSave=false;
 
   @override
   Widget build(BuildContext context) {
@@ -69,16 +69,9 @@ class _ProductScreenState extends State<ProductScreen>{
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              Container(
+              const SizedBox(height:20),
+              SizedBox(
                 width: double.infinity,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    topLeft: Radius.circular(20),
-                  ),
-                  color: Colors.white,
-                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -90,6 +83,10 @@ class _ProductScreenState extends State<ProductScreen>{
                         TextButton.icon(onPressed:(){}, icon:const Icon(Icons.check_circle_outline,color:green4,), label: const Text("Genuine",style:TextStyle(color:Colors.black),)),
                         TextButton.icon(onPressed:(){}, icon:const Icon(Icons.local_shipping_outlined,color:green4,), label: const Text("Free delivery",style:TextStyle(color:Colors.black),))
                       ],
+                    ),
+                    const Divider(
+                      color:mediumGray,
+                      thickness: 5,
                     ),
                     ListTile(
                       contentPadding:const EdgeInsets.symmetric(vertical:5, horizontal:0),
@@ -107,27 +104,25 @@ class _ProductScreenState extends State<ProductScreen>{
                       ),
                     ),
                     const Padding(
-                      padding: EdgeInsets.symmetric(horizontal:10,vertical:5),
-                      child: Text("Shop voucher",style:TextStyle(fontSize:15,color:Colors.black,fontWeight: FontWeight.bold),),
+                      padding: EdgeInsets.symmetric(horizontal:10,vertical:10),
+                      child: Text("Shop voucher:",style:TextStyle(fontSize:18,color:green1,fontWeight: FontWeight.bold),),
                     ),
-                    CouponCard(
-                      firstChild:Container(color: Colors.red,),
-                      secondChild:Text("13/2-14/2"),
-                      width:200,
-                      height:80,
-                      curveAxis: Axis.vertical,
-
-                      border:BorderSide(color: green1),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child:Row(
+                        children: [
+                          couponCard(),
+                          couponCard(),
+                          couponCard(),
+                          couponCard(),
+                        ],
+                      ),
                     ),
-                    // SingleChildScrollView(
-                    //   scrollDirection: Axis.horizontal,
-                    //   child:Row(
-                    //     children: [
-                    //       CouponCard(firstChild:Container(color: Colors.red,), secondChild:Text("13/2-14/2"))
-                    //     ],
-                    //   ),
-                    // ),
                     const SizedBox(height: 20),
+                    const Divider(
+                      color:mediumGray,
+                      thickness: 5,
+                    ),
                     ProductDescription(text: widget.product.description),
                   ],
                 ),
@@ -135,6 +130,44 @@ class _ProductScreenState extends State<ProductScreen>{
             ],
           ),
         ),
+      ),
+    );
+  }
+  Widget couponCard(){
+    return Padding(
+      padding: const EdgeInsets.only(left:10,right:10,bottom:5),
+      child: CouponCard(
+        firstChild:const Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Discount 20% max discount 150.000 VND",style:TextStyle(fontSize:15,fontWeight:FontWeight.w600,color: Colors.black),),
+            Text("12/2/2024-20/2/2004",style:TextStyle(fontSize:12,color:Colors.grey),)
+          ],
+        ),
+        secondChild:Container(
+          decoration: BoxDecoration(
+            color: onSave?Colors.white:green4,
+            border: Border.all(color:onSave?green4:Colors.white)
+          ),
+          height: 35,
+          width: 80,
+          child: Center(
+            child: TextButton(
+              child:Text(onSave?"Use it":'Save',style:TextStyle(color:onSave?green4:Colors.white,fontSize:13),),
+              onPressed:(){
+                setState(() {
+                  onSave=true;
+                });
+              },
+            ),
+          ),
+        ),
+        width:240,
+        height:80,
+        curvePosition:140,
+        curveAxis: Axis.vertical,
+        border:const BorderSide(color: green1),
       ),
     );
   }
