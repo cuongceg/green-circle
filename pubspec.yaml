@@ -44,6 +44,8 @@ dependencies:
   firebase_dynamic_links: ^5.4.13
   share_plus: ^7.2.2
   firebase_analytics: ^10.8.5
+  coupon_uikit: ^0.2.1
+  readmore: ^2.2.0
 
 dev_dependencies:
   flutter_test:
