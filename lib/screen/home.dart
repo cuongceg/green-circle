@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Flash sale", style: heading2),
+                      Text("Flash sale", style: heading2Green),
                       TextButton(
                         onPressed: () {},
                         child: Text("See all",style:title,),
