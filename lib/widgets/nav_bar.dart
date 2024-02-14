@@ -20,7 +20,7 @@ class _NavBarState extends State<NavBar> {
           appBar: AppBar(
             backgroundColor: Colors.white,
             forceMaterialTransparency:true,
-            title:IconButton(
+            leading:IconButton(
               icon: const Icon(Icons.menu_outlined,size: 30,),
               onPressed:(){},
             ),

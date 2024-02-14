@@ -4,7 +4,6 @@ import 'package:green_circle/screen/cart.dart';
 import 'package:green_circle/widgets/nav_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// TODO(cuongceg): change the size in bottom navigator bar.
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -57,16 +56,6 @@ class _MainScreenState extends State<MainScreen> {
               child: labelIcon(Icons.favorite_border_rounded,3,"Likes"),
             ),
             labelIcon(Icons.person,4,"Profile"),
-            // IconButton(
-            //   onPressed: () => setState(() {
-            //     currentTab = 0;
-            //   }),
-            //   icon: Icon(
-            //     Icons.home,
-            //     size: 25,
-            //     color: currentTab == 0 ? green1 : Colors.grey.shade400,
-            //   ),
-            // ),
           ],
         ),
       ),
