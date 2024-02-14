@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:green_circle/models/category.dart';
 
 class Product {
   final String title;
@@ -6,7 +7,7 @@ class Product {
   final String image;
   final double price;
   final List<Color> colors;
-  final String category;
+  final Category category;
   final double rate;
 
   Product({
@@ -32,7 +33,7 @@ final List<Product> products = [
       Colors.blue,
       Colors.orange,
     ],
-    category: "Headphones",
+    category: categories[0],
     rate: 4.8,
   ),
   Product(
@@ -46,7 +47,7 @@ final List<Product> products = [
       Colors.red,
       Colors.pink,
     ],
-    category: "Woman Fashion",
+    category: categories[1],
     rate: 4.8,
   ),
   Product(
@@ -58,7 +59,7 @@ final List<Product> products = [
     colors: [
       Colors.black,
     ],
-    category: "Watch",
+    category: categories[2],
     rate: 4.8,
   ),
 ];
