@@ -15,22 +15,14 @@ class ProductInfo extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical:5,horizontal:15),
           child: Text(
             "\$${product.price}",
-            style: const TextStyle(
-              color: green1,
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
+            style: price1,
           ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal:13),
           child: Text(
             product.title,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-            ),
+            style:titleProduct,
           ),
         ),
         Padding(

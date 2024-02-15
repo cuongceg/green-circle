@@ -35,7 +35,7 @@ class _ProductScreenState extends State<ProductScreen>{
             children: [
               ProductAppBar(cart:currentNumber,),
               Hero(
-                tag: widget.product.title,
+                tag: "${widget.product.title} sale",
                 child: ImageSlider(
                   onChange: (index) {
                     setState(() {
@@ -93,16 +93,16 @@ class _ProductScreenState extends State<ProductScreen>{
                   backgroundImage: AssetImage(widget.product.category.image),
                   radius:30,
                 ),
-                title:Text(widget.product.category.title,style:const TextStyle(fontSize:20,color:Colors.black),),
+                title:Text(widget.product.category.title,style:title2Black,),
                 subtitle:const Text("In Ha Noi",style:TextStyle(fontSize:12,color:Colors.grey),),
                 trailing:TextButton(
                   child:const Text("Explore shop",style:TextStyle(color:green1),),
                   onPressed:(){},
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal:10,vertical:10),
-                child: Text("Shop voucher:",style:TextStyle(fontSize:18,color:green1,fontWeight: FontWeight.bold),),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal:10,vertical:10),
+                child: Text("Shop voucher:",style:title3,),
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -121,17 +121,17 @@ class _ProductScreenState extends State<ProductScreen>{
                 color:mediumGray,
                 thickness: 5,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal:10,vertical:10),
-                child: Text("Product description:",style:TextStyle(fontSize:18,color:green1,fontWeight: FontWeight.bold),),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal:10,vertical:10),
+                child: Text("Product description:",style:title3,),
               ),
               ReadMoreText(
-                "   ${widget.product.description}",
+                "    ${widget.product.description}",
                 trimLines: 2,
                 trimMode: TrimMode.Line,
-                style: const TextStyle(fontSize:15,fontWeight:FontWeight.w400),
-                moreStyle: const TextStyle(fontSize:17,fontWeight:FontWeight.w500,color: green1),
-                lessStyle: const TextStyle(fontSize:17,fontWeight:FontWeight.w500,color: green1),
+                style: body1Black,
+                moreStyle: body1Green,
+                lessStyle:body1Green,
               ),
               const SizedBox(height:80,)
             ],

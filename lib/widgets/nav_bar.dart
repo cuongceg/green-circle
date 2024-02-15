@@ -80,12 +80,12 @@ class _NavBarState extends State<NavBar> {
                   ),
                   Tab(
                       child:Center(
-                        child:Text("Voucher"),
+                        child:Text("Flash sale"),
                       )
                   ),
                   Tab(
                       child:Center(
-                        child:Text("Sale"),
+                        child:Text("Voucher"),
                       )
                   ),
                 ]),

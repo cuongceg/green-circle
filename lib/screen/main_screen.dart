@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/screen/cart.dart';
+import 'package:green_circle/screen/profile_screen.dart';
 import 'package:green_circle/widgets/nav_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
     Scaffold(),
     Scaffold(),
     CartScreen(),
-    Scaffold(),
+    ProfileScreen(),
   ];
 
   @override

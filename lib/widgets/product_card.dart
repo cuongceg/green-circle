@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/models/production.dart';
 import 'package:green_circle/screen/product_screen.dart';
-import 'package:badges/badges.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -30,9 +29,10 @@ class ProductCard extends StatelessWidget {
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Hero(
-                tag: product.title,
+                tag: "${product.title} sale",
                 child: Image.asset(
                   product.image,
                   width: 150,
@@ -40,13 +40,16 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
               const Divider(),
-              Text(product.title,style:titleProduct,),
+              Padding(
+                padding: const EdgeInsets.only(left:10),
+                child: Text(product.title,style:body1Black,),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical:8,horizontal:10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("\$${product.price}",style:price,),
+                    Text("\$${product.price}",style:body1Black,),
                     IconButton(
                         onPressed:(){},
                         icon: const Icon(Icons.favorite_border_rounded)
@@ -73,13 +76,20 @@ class ProductCard extends StatelessWidget {
             )]
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(
-                product.image,
-                width: 170,
-                height: 125,
+              Hero(
+                tag: product.title,
+                child: Image.asset(
+                  product.image,
+                  width: 170,
+                  height: 125,
+                ),
               ),
-              Text(product.title, style:titleProduct),
+              Padding(
+                padding: const EdgeInsets.only(left:10),
+                child: Text(product.title, style:body1Black),
+              ),
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,7 +98,7 @@ class ProductCard extends StatelessWidget {
                       padding: const EdgeInsets.only(left:10.0),
                       child: Text(
                           "\$${product.price}",
-                          style: price
+                          style: body1Black
                       ),
                     ),
                     IconButton(

@@ -38,10 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Flash sale", style: heading2Green),
+                      Text("Flash sale", style:title2),
                       TextButton(
                         onPressed: () {},
-                        child: Text("See all",style:title,),
+                        child: Text("See all",style:body1Green,),
                       ),
                     ],
                   ),
@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Padding(
                   padding:const EdgeInsets.symmetric(horizontal:10,vertical:20),
-                  child:Text("Daily Discover",style:heading2Green,),
+                  child:Text("Daily Discover",style:title2,),
                 ),
                 GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
