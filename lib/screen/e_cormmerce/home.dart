@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/models/production.dart';
-import 'package:green_circle/widgets/home_slider.dart';
-import 'package:green_circle/widgets/product_card.dart';
+import 'package:green_circle/widgets/e_cormmerce/product_widgets/home_slider.dart';
+import 'package:green_circle/widgets/e_cormmerce/product_widgets/product_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

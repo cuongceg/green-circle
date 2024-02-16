@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
-import 'package:green_circle/screen/home.dart';
+import 'package:green_circle/screen/e_cormmerce/home.dart';
 import 'package:badges/badges.dart' as badges;
 
 class NavBar extends StatefulWidget {

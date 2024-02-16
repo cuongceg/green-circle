@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/models/production.dart';
-import 'package:green_circle/screen/product_screen.dart';
+import 'package:green_circle/screen/e_cormmerce/product_screen.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
