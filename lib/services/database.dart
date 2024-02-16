@@ -4,7 +4,24 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+//TODO(cuongceg): add new stream to get data
+/*
+Example:
+List<UserInformation>_authDataFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.docs.map((doc){
+      return UserInformation(
+        username:doc.data().toString().contains('username')?doc.get('username'):" ",
+        fullname:doc.data().toString().contains('fullname')?doc.get('fullname'):" ",
+        asset:doc.data().toString().contains('assets')?doc.get('assets'):" ",
+        uid:doc.data().toString().contains('uid')?doc.get('uid'):" ",
+    );//UserInformation is a class in model
+    }).toList();
+  }
 
+  Stream<List<UserInformation>> get authData{
+    return userCollection.snapshots().map((_authDataFromSnapshot));
+  }
+ */
 class Database{
   String? uid;
   Database({this.uid});

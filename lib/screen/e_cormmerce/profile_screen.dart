@@ -5,7 +5,7 @@ import 'package:green_circle/services/auth_services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green_circle/services/database.dart';
 import 'package:provider/provider.dart';
-
+//TODO(cuongceg): update UI
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -38,6 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 AuthService().signOut();
               },
             ),
+            // button upload image to Firebase Storage
             IconButton(
                 onPressed:(){
                   Database(uid:user!.uid).uploadImage(context);
