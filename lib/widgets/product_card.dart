@@ -21,8 +21,7 @@ class ProductCard extends StatelessWidget {
       child:isHorizontal?Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Container(
-          height:160,
-          width: 160,
+          width: 180,
           decoration: BoxDecoration(
               border:Border.all(color:mediumGray,width: 2.0),
               borderRadius:BorderRadius.circular(12),
@@ -35,28 +34,27 @@ class ProductCard extends StatelessWidget {
                 tag: "${product.title} sale",
                 child: Image.asset(
                   product.image[0],
-                  width: 150,
-                  height: 95,
+                  width: 170,
+                  height: 100,
                 ),
               ),
-              const Divider(),
               Padding(
-                padding: const EdgeInsets.only(left:10),
+                padding: const EdgeInsets.only(left:10,bottom:8),
                 child: Text(product.title,style:body1Black,),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical:8,horizontal:10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("\$${product.price}",style:body1Black,),
-                    IconButton(
-                        onPressed:(){},
-                        icon: const Icon(Icons.favorite_border_rounded)
-                    )
-                  ],
-                ),
-              )
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding:const EdgeInsets.only(left:10.0),
+                    child: Text("\$${product.price}",style:body1Black,),
+                  ),
+                  TextButton.icon(
+                      onPressed:(){},
+                      icon: const Icon(Icons.favorite,color:mediumGray,),
+                      label: Text("${product.likedNumber}",style:body1Black,)),
+                ],
+              ),
             ],
           ),
         ),
@@ -101,10 +99,10 @@ class ProductCard extends StatelessWidget {
                           style: body1Black
                       ),
                     ),
-                    IconButton(
+                    TextButton.icon(
                         onPressed:(){},
-                        icon: Image.asset("assets/images/heart_icon.png",height:30,width:30,)
-                    ),
+                        icon: const Icon(Icons.favorite,color:mediumGray,),
+                        label: Text("${product.likedNumber}",style:body1Black,)),
                   ],
                 ),
               )
