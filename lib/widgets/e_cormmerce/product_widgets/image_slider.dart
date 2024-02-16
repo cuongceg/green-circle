@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 class ImageSlider extends StatelessWidget {
   final Function(int) onChange;
   final int currentImage;
-  final String image;
+  final List<String> image;
   const ImageSlider({
     super.key,
     required this.onChange,
@@ -16,10 +16,10 @@ class ImageSlider extends StatelessWidget {
     return SizedBox(
       height: 250,
       child: PageView.builder(
-        itemCount: 5,
+        itemCount: image.length,
         onPageChanged: onChange,
         itemBuilder: (context, index) {
-          return Image.asset(image);
+          return Image.asset(image[index]);
         },
       ),
     );

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/models/production.dart';
-import 'package:green_circle/widgets/coupon_card.dart';
-import 'package:green_circle/widgets/product_widgets/image_slider.dart';
-import 'package:green_circle/widgets/product_widgets/product_info.dart';
-import 'package:green_circle/widgets/product_widgets/add_cart.dart';
-import 'package:green_circle/widgets/product_widgets/appbar.dart';
+import 'package:green_circle/widgets/e_cormmerce/product_widgets/coupon_card.dart';
+import 'package:green_circle/widgets/e_cormmerce/product_widgets/image_slider.dart';
+import 'package:green_circle/widgets/e_cormmerce/product_widgets/product_info.dart';
+import 'package:green_circle/widgets/e_cormmerce/product_widgets/add_cart.dart';
+import 'package:green_circle/widgets/e_cormmerce/product_widgets/appbar.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -17,7 +17,7 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen>{
-  int currentImage = 0;
+  int currentImageIndex = 0;
   int currentNumber = 1;
 
   @override
@@ -35,14 +35,14 @@ class _ProductScreenState extends State<ProductScreen>{
             children: [
               ProductAppBar(cart:currentNumber,),
               Hero(
-                tag: widget.product.title,
+                tag: "${widget.product.title} sale",
                 child: ImageSlider(
                   onChange: (index) {
                     setState(() {
-                      currentImage = index;
+                      currentImageIndex = index;
                     });
                   },
-                  currentImage: currentImage,
+                  currentImage: currentImageIndex,
                   image: widget.product.image,
                 ),
               ),
@@ -53,7 +53,7 @@ class _ProductScreenState extends State<ProductScreen>{
                   5,
                       (index) => AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
-                    width: currentImage == index ? 15 : 8,
+                    width: currentImageIndex == index ? 15 : 8,
                     height: 8,
                     margin: const EdgeInsets.only(right: 2),
                     decoration: BoxDecoration(
@@ -61,7 +61,7 @@ class _ProductScreenState extends State<ProductScreen>{
                       border: Border.all(
                         color: Colors.black,
                       ),
-                      color: currentImage == index
+                      color: currentImageIndex == index
                           ? Colors.black
                           : Colors.transparent,
                     ),
@@ -93,16 +93,16 @@ class _ProductScreenState extends State<ProductScreen>{
                   backgroundImage: AssetImage(widget.product.category.image),
                   radius:30,
                 ),
-                title:Text(widget.product.category.title,style:const TextStyle(fontSize:20,color:Colors.black),),
+                title:Text(widget.product.category.title,style:title2Black,),
                 subtitle:const Text("In Ha Noi",style:TextStyle(fontSize:12,color:Colors.grey),),
                 trailing:TextButton(
                   child:const Text("Explore shop",style:TextStyle(color:green1),),
                   onPressed:(){},
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal:10,vertical:10),
-                child: Text("Shop voucher:",style:TextStyle(fontSize:18,color:green1,fontWeight: FontWeight.bold),),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal:10,vertical:10),
+                child: Text("Shop voucher:",style:title3,),
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -121,17 +121,17 @@ class _ProductScreenState extends State<ProductScreen>{
                 color:mediumGray,
                 thickness: 5,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal:10,vertical:10),
-                child: Text("Product description:",style:TextStyle(fontSize:18,color:green1,fontWeight: FontWeight.bold),),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal:10,vertical:10),
+                child: Text("Product description:",style:title3,),
               ),
               ReadMoreText(
-                "   ${widget.product.description}",
+                "    ${widget.product.description}",
                 trimLines: 2,
                 trimMode: TrimMode.Line,
-                style: const TextStyle(fontSize:15,fontWeight:FontWeight.w400),
-                moreStyle: const TextStyle(fontSize:17,fontWeight:FontWeight.w500,color: green1),
-                lessStyle: const TextStyle(fontSize:17,fontWeight:FontWeight.w500,color: green1),
+                style: body1Black,
+                moreStyle: body1Green,
+                lessStyle:body1Green,
               ),
               const SizedBox(height:80,)
             ],

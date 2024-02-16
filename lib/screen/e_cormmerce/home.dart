@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/models/production.dart';
-import 'package:green_circle/widgets/home_slider.dart';
-import 'package:green_circle/widgets/product_card.dart';
+import 'package:green_circle/widgets/e_cormmerce/home_slider.dart';
+import 'package:green_circle/widgets/e_cormmerce/product_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -38,17 +38,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Flash sale", style: heading2Green),
+                      Text("Flash sale", style:title2),
                       TextButton(
                         onPressed: () {},
-                        child: Text("See all",style:title,),
+                        child: Text("See all",style:body1Green,),
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 10),
                 SizedBox(
-                  height:200,
+                  height:180,
                   width: 500,
                   child: ListView.builder(
                       physics: const AlwaysScrollableScrollPhysics(),
@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Padding(
                   padding:const EdgeInsets.symmetric(horizontal:10,vertical:20),
-                  child:Text("Daily Discover",style:heading2Green,),
+                  child:Text("Daily Discover",style:title2,),
                 ),
                 GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),

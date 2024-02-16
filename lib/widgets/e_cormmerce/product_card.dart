@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/models/production.dart';
-import 'package:green_circle/screen/product_screen.dart';
-import 'package:badges/badges.dart';
+import 'package:green_circle/screen/e_cormmerce/product_screen.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -22,38 +21,40 @@ class ProductCard extends StatelessWidget {
       child:isHorizontal?Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Container(
-          height:160,
-          width: 160,
+          width: 180,
           decoration: BoxDecoration(
               border:Border.all(color:mediumGray,width: 2.0),
               borderRadius:BorderRadius.circular(12),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Hero(
-                tag: product.title,
+                tag: "${product.title} sale",
                 child: Image.asset(
-                  product.image,
-                  width: 150,
-                  height: 95,
+                  product.image[0],
+                  width: 170,
+                  height: 100,
                 ),
               ),
-              const Divider(),
-              Text(product.title,style:titleProduct,),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical:8,horizontal:10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("\$${product.price}",style:price,),
-                    IconButton(
-                        onPressed:(){},
-                        icon: const Icon(Icons.favorite_border_rounded)
-                    )
-                  ],
-                ),
-              )
+                padding: const EdgeInsets.only(left:10,bottom:8),
+                child: Text(product.title,style:body1Black,),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding:const EdgeInsets.only(left:10.0),
+                    child: Text("\$${product.price}",style:body1Black,),
+                  ),
+                  TextButton.icon(
+                      onPressed:(){},
+                      icon: const Icon(Icons.favorite,color:mediumGray,),
+                      label: Text("${product.likedNumber}",style:body1Black,)),
+                ],
+              ),
             ],
           ),
         ),
@@ -73,13 +74,20 @@ class ProductCard extends StatelessWidget {
             )]
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(
-                product.image,
-                width: 170,
-                height: 125,
+              Hero(
+                tag: product.title,
+                child: Image.asset(
+                  product.image[0],
+                  width: 170,
+                  height: 125,
+                ),
               ),
-              Text(product.title, style:titleProduct),
+              Padding(
+                padding: const EdgeInsets.only(left:10),
+                child: Text(product.title, style:body1Black),
+              ),
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,13 +96,13 @@ class ProductCard extends StatelessWidget {
                       padding: const EdgeInsets.only(left:10.0),
                       child: Text(
                           "\$${product.price}",
-                          style: price
+                          style: body1Black
                       ),
                     ),
-                    IconButton(
+                    TextButton.icon(
                         onPressed:(){},
-                        icon: Image.asset("assets/images/heart_icon.png",height:30,width:30,)
-                    ),
+                        icon: const Icon(Icons.favorite,color:mediumGray,),
+                        label: Text("${product.likedNumber}",style:body1Black,)),
                   ],
                 ),
               )

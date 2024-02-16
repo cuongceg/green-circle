@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
-import 'package:green_circle/screen/home.dart';
+import 'package:green_circle/screen/e_cormmerce/home.dart';
 import 'package:badges/badges.dart' as badges;
 
 class NavBar extends StatefulWidget {
@@ -20,7 +20,7 @@ class _NavBarState extends State<NavBar> {
           appBar: AppBar(
             backgroundColor: Colors.white,
             forceMaterialTransparency:true,
-            title:IconButton(
+            leading:IconButton(
               icon: const Icon(Icons.menu_outlined,size: 30,),
               onPressed:(){},
             ),
@@ -80,12 +80,12 @@ class _NavBarState extends State<NavBar> {
                   ),
                   Tab(
                       child:Center(
-                        child:Text("Voucher"),
+                        child:Text("Flash sale"),
                       )
                   ),
                   Tab(
                       child:Center(
-                        child:Text("Sale"),
+                        child:Text("Voucher"),
                       )
                   ),
                 ]),
