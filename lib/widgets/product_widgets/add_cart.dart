@@ -56,7 +56,7 @@ class _AddToCartState extends State<AddToCart> {
                                       children: [
                                         Row(
                                           children: [
-                                            Image.asset(widget.product.image,height:150,width:150,),
+                                            Image.asset(widget.product.image[0],height:150,width:150,),
                                             Expanded(
                                                 child:ListTile(
                                                   title:Text("\$${widget.product.price}",style:title2,),

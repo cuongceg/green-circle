@@ -17,7 +17,7 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen>{
-  int currentImage = 0;
+  int currentImageIndex = 0;
   int currentNumber = 1;
 
   @override
@@ -39,10 +39,10 @@ class _ProductScreenState extends State<ProductScreen>{
                 child: ImageSlider(
                   onChange: (index) {
                     setState(() {
-                      currentImage = index;
+                      currentImageIndex = index;
                     });
                   },
-                  currentImage: currentImage,
+                  currentImage: currentImageIndex,
                   image: widget.product.image,
                 ),
               ),
@@ -53,7 +53,7 @@ class _ProductScreenState extends State<ProductScreen>{
                   5,
                       (index) => AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
-                    width: currentImage == index ? 15 : 8,
+                    width: currentImageIndex == index ? 15 : 8,
                     height: 8,
                     margin: const EdgeInsets.only(right: 2),
                     decoration: BoxDecoration(
@@ -61,7 +61,7 @@ class _ProductScreenState extends State<ProductScreen>{
                       border: Border.all(
                         color: Colors.black,
                       ),
-                      color: currentImage == index
+                      color: currentImageIndex == index
                           ? Colors.black
                           : Colors.transparent,
                     ),

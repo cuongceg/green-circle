@@ -33,7 +33,7 @@ class CartTile extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.all(10),
                 child: Image.asset(
-                  item.product.image,
+                  item.product.image[0],
                 ),
               ),
               const SizedBox(width: 10),

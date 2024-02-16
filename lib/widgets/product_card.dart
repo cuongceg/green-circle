@@ -34,7 +34,7 @@ class ProductCard extends StatelessWidget {
               Hero(
                 tag: "${product.title} sale",
                 child: Image.asset(
-                  product.image,
+                  product.image[0],
                   width: 150,
                   height: 95,
                 ),
@@ -81,7 +81,7 @@ class ProductCard extends StatelessWidget {
               Hero(
                 tag: product.title,
                 child: Image.asset(
-                  product.image,
+                  product.image[0],
                   width: 170,
                   height: 125,
                 ),
