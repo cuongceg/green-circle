@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/screen/e_cormmerce/cart.dart';
 import 'package:green_circle/screen/e_cormmerce/profile_screen.dart';
+import 'package:green_circle/screen/mapbox/map.dart';
 import 'package:green_circle/widgets/e_cormmerce/nav_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
   int currentTab = 0;
   List screens = const [
     NavBar(),
-    Scaffold(),
+    FullMap(),
     Scaffold(),
     CartScreen(),
     ProfileScreen(),

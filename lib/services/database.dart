@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
-//TODO(cuongceg): add new stream to get data
+// TODO: add new stream to get data.
 /*
 Example:
 List<UserInformation>_authDataFromSnapshot(QuerySnapshot snapshot){

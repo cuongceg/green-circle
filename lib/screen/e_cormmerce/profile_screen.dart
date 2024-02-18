@@ -5,7 +5,7 @@ import 'package:green_circle/services/auth_services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green_circle/services/database.dart';
 import 'package:provider/provider.dart';
-//TODO(cuongceg): update UI
+// TODO: update UI
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -14,6 +14,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  String ACCESS_TOKEN = String.fromEnvironment("PUBLIC_ACCESS_TOKEN");
   @override
   Widget build(BuildContext context) {
     final user=Provider.of<MyUser?>(context);
@@ -44,6 +45,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Database(uid:user!.uid).uploadImage(context);
                 },
                 icon: const Icon(Icons.upload)),
+            IconButton(
+                onPressed:(){
+                  print(ACCESS_TOKEN);
+                },
+                icon:Icon(Icons.get_app)
+            ),
           ],
         )
       ),
