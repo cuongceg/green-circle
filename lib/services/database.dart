@@ -34,6 +34,7 @@ class Database{
     });
   }
 
+// database upload image
   final storageRef = FirebaseStorage.instance.ref();
   Future<void> uploadImage(BuildContext context)async{
     final userRef= storageRef.child("$uid/test.png");
@@ -55,4 +56,7 @@ class Database{
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
+  //database calculate current position to shop
+
 }
+

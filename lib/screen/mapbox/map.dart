@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/foundation.dart';
-import 'dart:math';
-import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -22,128 +21,96 @@ class _FullMapState extends State<FullMap> {
 
   _onMapCreated(MapboxMapController controller){
     mapController=controller;
-    controller.onCircleTapped.add(_onCircleTapped);
     controller.onSymbolTapped.add(_onSymbolTapped);
-    controller.onFillTapped.add(_onFillTapped);
   }
 
-  _showSnackBar(String type, String id) {
+  _showSnackBar(String name) {
     final snackBar = SnackBar(
-        content: Text('Tapped $type $id',
-            style: snackBarFonts),
-        backgroundColor: green1);
+        content: Text('Welcome to $name',style: snackBarFonts),backgroundColor: green1);
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
-
-  void _onCircleTapped(Circle circle){
-    _showSnackBar("circle",circle.id);
-  }
   void _onSymbolTapped(Symbol symbol){
-    _showSnackBar("symbol",symbol.id);
-  }
-  void _onFillTapped(Fill fill){
-    _showSnackBar("fill",fill.id);
-  }
-  void _addLocation(MapboxMapController controller){
-    const LatLng leftCorner=LatLng(21.004721, 105.844047);
-    const double latIncrement= 50/110574;//height of rectangle location is 50
-    final double lngIncrement=  30 / (111320 * cos(leftCorner.latitude * pi / 180));//width of rectangle location is 30
-    final List<LatLng> rectangleCoordinates = [
-      leftCorner, // Top left corner
-      LatLng(leftCorner.latitude + latIncrement, leftCorner.longitude), // Top right corner
-      LatLng(leftCorner.latitude + latIncrement, leftCorner.longitude + lngIncrement), // Bottom right corner
-      LatLng(leftCorner.latitude, leftCorner.longitude + lngIncrement), // Bottom left corner
-    ];
-    Map<String, dynamic> geoJsonSource = jsonDecode('''
-  {
-    "type": "FeatureCollection",
-    "features": [{
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "id": 0
-        "coordinates": [[
-          [${rectangleCoordinates[0].longitude}, ${rectangleCoordinates[0].latitude}],
-          [${rectangleCoordinates[1].longitude}, ${rectangleCoordinates[1].latitude}],
-          [${rectangleCoordinates[2].longitude}, ${rectangleCoordinates[2].latitude}],
-          [${rectangleCoordinates[3].longitude}, ${rectangleCoordinates[3].latitude}],
-          [${rectangleCoordinates[0].longitude}, ${rectangleCoordinates[0].latitude}]
-        ]]
-      },
-      "properties": {
-      "name": "Feature 1",
-      "category": "Green",}
-    }]
-  }
-''');
-    controller.addGeoJsonSource('green-id',geoJsonSource);
-    controller.addFillLayer(
-      "green_id","green_id",
-      const FillLayerProperties(
-          fillColor:[Expressions.interpolate, ['exponential', 0.5], [Expressions.zoom], 11, 'red', 18, 'green'],
-          fillOpacity: 0.8
-      )
-    );
+    LatLng? symbolPos=symbol.options.geometry;
+    if(symbolPos!=null){
+      mapController.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target:symbolPos,
+          zoom:18,
+          tilt: 180.0,
+        )
+      ));
+    }
+    _showSnackBar(symbol.options.textField??"");
   }
   void _onStyleLoaded()async{
-    //await mapController.addGeoJsonSource(sourceId, geojson)
-    mapController.addCircle(
-      const CircleOptions(
+    mapController.addSymbol(
+      const SymbolOptions(
         geometry:LatLng(21.004721, 105.844047),
-        circleColor:"#5CAF56",
-        circleStrokeWidth: 2,
-        circleRadius:5,
+        iconImage:"assets/images/cart_icon.png",
+        iconColor:"#5CAF56",
+        iconSize:1.7,
+        textField:"Green Grocery Facility 1",
+        textColor:"#5CAF56",
+        textSize:10,
+        iconOffset:Offset(0,-9)
       )
     );
-    const LatLng leftCorner=LatLng(21.004721, 105.844047);
-    const double latIncrement= 5000/110574;//height of rectangle location is 50
-    final double lngIncrement=  3000/ (111320 * cos(leftCorner.latitude * pi / 180));//width of rectangle location is 30
-    final List<LatLng> rectangleCoordinates = [
-      leftCorner, // Top left corner
-      LatLng(leftCorner.latitude + latIncrement, leftCorner.longitude), // Top right corner
-      LatLng(leftCorner.latitude + latIncrement, leftCorner.longitude + lngIncrement), // Bottom right corner
-      LatLng(leftCorner.latitude, leftCorner.longitude + lngIncrement), // Bottom left corner
-    ];
-    Map<String, dynamic> geoJsonSource = jsonDecode('''
-  {
-    "type": "FeatureCollection",
-    "features": [{
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "id": 0
-        "coordinates": [[
-          [${rectangleCoordinates[0].longitude}, ${rectangleCoordinates[0].latitude}],
-          [${rectangleCoordinates[1].longitude}, ${rectangleCoordinates[1].latitude}],
-          [${rectangleCoordinates[2].longitude}, ${rectangleCoordinates[2].latitude}],
-          [${rectangleCoordinates[3].longitude}, ${rectangleCoordinates[3].latitude}],
-          [${rectangleCoordinates[0].longitude}, ${rectangleCoordinates[0].latitude}]
-        ]]
-      },
-      "properties": {
-      "name": "Feature 1",
-      "category": "Green",}
-    }]
-  }
-''');
-    await mapController.addGeoJsonSource('green-id',geoJsonSource);
-    mapController.addFill(
-      FillOptions(
-          geometry: [rectangleCoordinates],
-          fillColor:"#AED038",
-          fillOutlineColor: "#000000",
-      ),
-    );
-    await mapController.addFillLayer(
-        "green_id","green_id",
-        const FillLayerProperties(
-            fillOpacity: 0.8
+    mapController.addSymbol(
+        const SymbolOptions(
+            geometry:LatLng(20.981340, 105.853674),
+            iconImage:"assets/images/cart_icon.png",
+            iconColor:"#5CAF56",
+            iconSize:1.7,
+            textField:"Green Grocery Facility 2",
+            textColor:"#5CAF56",
+            textSize:10,
+            iconOffset:Offset(0,-9)
         )
     );
-    _addLocation(mapController);
+    mapController.addSymbol(
+        const SymbolOptions(
+            geometry:LatLng(20.963949, 105.831959),
+            iconImage:"assets/images/cart_icon.png",
+            iconColor:"#5CAF56",
+            iconSize:1.7,
+            textField:"Green Grocery Facility 3",
+            textColor:"#5CAF56",
+            textSize:10,
+            iconOffset:Offset(0,-9)
+        )
+    );
   }
 
+  Future getShortestPath()async{
+    String url ="https://api.mapbox.com/directions/v5/mapbox/driving/105.844920,21.005000;105.844655,20.980339?geometries=geojson&access_token=pk.eyJ1IjoidGh1Y2t1YmluIiwiYSI6ImNsbTYxYzJ1azB2MjQzcHA0NGR0YnIxMTUifQ.88hO1oKIFSZsljzkR2vP8w";
+    try{
+      Dio().options.contentType=Headers.jsonContentType;
+      Response<Map<String,dynamic>> responseData= await Dio().get<Map<String,dynamic>>(url);
+      debugPrint('${responseData.statusCode}');
+      if(responseData.statusCode==200){
+        Map<String,dynamic>? data=responseData.data;
+        if(data!=null){
+          List<dynamic> routes=data['routes'];
+          List<LatLng> coordinates = routes.expand((route) {
+            List<dynamic> geometryCoordinates = route['geometry']['coordinates'];
+            return geometryCoordinates.map((coordinate) => LatLng(coordinate[1], coordinate[0])); // Reversed for LatLng format
+          }).toList();
+          mapController.addLine(
+            LineOptions(
+              geometry: coordinates,
+              lineColor: "#5CAF56",
+              lineWidth:4.0
+            )
+          );
+        }
+      }
+      return responseData.data;
+    }catch(e){
+      debugPrint("Error fetching shortest path: $e");
+      return null;
+    }
+  }
   @override
   void initState() {
     super.initState();
@@ -159,9 +126,7 @@ class _FullMapState extends State<FullMap> {
 
   @override
   void dispose(){
-    mapController.onCircleTapped.remove(_onCircleTapped);
     mapController.onSymbolTapped.remove(_onSymbolTapped);
-    mapController.onFillTapped.remove(_onFillTapped);
     super.dispose();
   }
 
@@ -179,6 +144,7 @@ class _FullMapState extends State<FullMap> {
                     initialCameraPosition: const CameraPosition(target: LatLng(21.005000,105.844920),zoom:17,tilt: 180.0,),
                     onMapCreated: _onMapCreated,
                     onStyleLoadedCallback: _onStyleLoaded,
+
                     gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
                       Factory<OneSequenceGestureRecognizer>(
                             () => EagerGestureRecognizer(),
@@ -195,6 +161,7 @@ class _FullMapState extends State<FullMap> {
                   )),
             ),
             _getPermission(),
+            _getShortesPath()
           ],
         ));
   }
@@ -204,7 +171,18 @@ class _FullMapState extends State<FullMap> {
       onPressed: () async {
         var status = await Permission.locationWhenInUse.request();
         print("Location granted : $status");
+        if(status==PermissionStatus.granted){
+          mapController.onUserLocationUpdated;
+        }
       },
+    );
+  }
+  Widget _getShortesPath() {
+    return TextButton(
+      child: const Text('get shortest path'),
+      onPressed: () {
+        getShortestPath();
+      }
     );
   }
 }
