@@ -6,7 +6,8 @@ import 'package:mapbox_gl/mapbox_gl.dart';
 class RecyclingLocationDetail extends StatelessWidget {
   final String name;
   final MapboxMapController mapController;
-  const RecyclingLocationDetail({super.key,required this.name,required this.mapController});
+  List<Line>existingLine;
+  RecyclingLocationDetail({super.key,required this.name,required this.mapController,required this.existingLine});
   @override
   Widget build(BuildContext context) {
     double width=MediaQuery.of(context).size.width;
@@ -35,13 +36,13 @@ class RecyclingLocationDetail extends StatelessWidget {
                   child: TextButton.icon(
                     onPressed:(){
                       if(name=="Green Recycling Location Facility 1"){
-                        Database().getLocation1Path(mapController);
+                        Database().getLocation1Path(mapController,existingLine);
                       }
                       else if(name=="Green Recycling Location Facility 2"){
-                        Database().getLocation2Path(mapController);
+                        Database().getLocation2Path(mapController,existingLine);
                       }
                       else{
-                        Database().getLocation3Path(mapController);
+                        Database().getLocation3Path(mapController,existingLine);
                       }
                       Navigator.pop(context);
                     },

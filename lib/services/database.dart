@@ -60,8 +60,10 @@ class Database{
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
+
+
   //database direction to recycling locations
-  Future getShortestPath(MapboxMapController mapController)async{
+  Future getShortestPath(MapboxMapController mapController,List<Line> existingLines)async{
     String url1 ="https://api.mapbox.com/directions/v5/mapbox/driving/105.844920,21.005000;105.844655,20.980339?geometries=geojson&access_token=pk.eyJ1IjoidGh1Y2t1YmluIiwiYSI6ImNsbTYxYzJ1azB2MjQzcHA0NGR0YnIxMTUifQ.88hO1oKIFSZsljzkR2vP8w";
     String url2 ="https://api.mapbox.com/directions/v5/mapbox/driving/105.853674,20.981340;105.844655,20.980339?geometries=geojson&access_token=pk.eyJ1IjoidGh1Y2t1YmluIiwiYSI6ImNsbTYxYzJ1azB2MjQzcHA0NGR0YnIxMTUifQ.88hO1oKIFSZsljzkR2vP8w";
     String url3 ="https://api.mapbox.com/directions/v5/mapbox/driving/105.831959,20.963949;105.844655,20.980339?geometries=geojson&access_token=pk.eyJ1IjoidGh1Y2t1YmluIiwiYSI6ImNsbTYxYzJ1azB2MjQzcHA0NGR0YnIxMTUifQ.88hO1oKIFSZsljzkR2vP8w";
@@ -98,7 +100,11 @@ class Database{
             List<dynamic> geometryCoordinates = route['geometry']['coordinates'];
             return geometryCoordinates.map((coordinate) => LatLng(coordinate[1], coordinate[0])); // Reversed for LatLng format
           }).toList();
-          mapController.addLine(
+          for(Line line in existingLines){
+            mapController.removeLine(line);
+          }
+          existingLines.clear();
+          Line newLine = await mapController.addLine(
               LineOptions(
                   geometry: coordinates,
                   lineColor: "#5CAF56",
@@ -106,6 +112,7 @@ class Database{
                   lineJoin:'round'
               )
           );
+          existingLines.add(newLine);
         }
       }
       return responseData1.data;
@@ -114,7 +121,7 @@ class Database{
       return null;
     }
   }
-  Future getLocation1Path(MapboxMapController mapController)async{
+  Future<double> getLocation1Path(MapboxMapController mapController,List<Line> existingLines)async{
     String url ="https://api.mapbox.com/directions/v5/mapbox/driving/105.844920,21.005000;105.844655,20.980339?geometries=geojson&access_token=pk.eyJ1IjoidGh1Y2t1YmluIiwiYSI6ImNsbTYxYzJ1azB2MjQzcHA0NGR0YnIxMTUifQ.88hO1oKIFSZsljzkR2vP8w";
   try{
     Dio().options.contentType=Headers.jsonContentType;
@@ -128,7 +135,11 @@ class Database{
           List<dynamic> geometryCoordinates = route['geometry']['coordinates'];
           return geometryCoordinates.map((coordinate) => LatLng(coordinate[1], coordinate[0])); // Reversed for LatLng format
         }).toList();
-        mapController.addLine(
+        for(Line line in existingLines){
+          mapController.removeLine(line);
+        }
+        existingLines.clear();
+        Line newLine = await mapController.addLine(
             LineOptions(
                 geometry: coordinates,
                 lineColor: "#5CAF56",
@@ -136,14 +147,17 @@ class Database{
                 lineJoin:'round'
             )
         );
+        existingLines.add(newLine);
+        return routes[0]['distance'].toDouble();
       }
     }
+    return 0;
   }catch(e){
     debugPrint("Error fetching shortest path: $e");
-    return null;
+    return 0;
   }
   }
-  Future getLocation2Path(MapboxMapController mapController)async{
+  Future getLocation2Path(MapboxMapController mapController,List<Line> existingLines)async{
     String url ="https://api.mapbox.com/directions/v5/mapbox/driving/105.853674,20.981340;105.844655,20.980339?geometries=geojson&access_token=pk.eyJ1IjoidGh1Y2t1YmluIiwiYSI6ImNsbTYxYzJ1azB2MjQzcHA0NGR0YnIxMTUifQ.88hO1oKIFSZsljzkR2vP8w";
     try{
       Dio().options.contentType=Headers.jsonContentType;
@@ -157,7 +171,11 @@ class Database{
             List<dynamic> geometryCoordinates = route['geometry']['coordinates'];
             return geometryCoordinates.map((coordinate) => LatLng(coordinate[1], coordinate[0])); // Reversed for LatLng format
           }).toList();
-          mapController.addLine(
+          for(Line line in existingLines){
+            mapController.removeLine(line);
+          }
+          existingLines.clear();
+          Line newLine = await mapController.addLine(
               LineOptions(
                   geometry: coordinates,
                   lineColor: "#5CAF56",
@@ -165,6 +183,7 @@ class Database{
                   lineJoin:'round'
               )
           );
+          existingLines.add(newLine);
         }
       }
     }catch(e){
@@ -172,7 +191,7 @@ class Database{
       return null;
     }
   }
-  Future getLocation3Path(MapboxMapController mapController)async{
+  Future getLocation3Path(MapboxMapController mapController,List<Line>existingLines)async{
     String url ="https://api.mapbox.com/directions/v5/mapbox/driving/105.831959,20.963949;105.844655,20.980339?geometries=geojson&access_token=pk.eyJ1IjoidGh1Y2t1YmluIiwiYSI6ImNsbTYxYzJ1azB2MjQzcHA0NGR0YnIxMTUifQ.88hO1oKIFSZsljzkR2vP8w";
     try{
       Dio().options.contentType=Headers.jsonContentType;
@@ -186,7 +205,11 @@ class Database{
             List<dynamic> geometryCoordinates = route['geometry']['coordinates'];
             return geometryCoordinates.map((coordinate) => LatLng(coordinate[1], coordinate[0])); // Reversed for LatLng format
           }).toList();
-          mapController.addLine(
+          for(Line line in existingLines){
+            mapController.removeLine(line);
+          }
+          existingLines.clear();
+          Line newLine = await mapController.addLine(
               LineOptions(
                   geometry: coordinates,
                   lineColor: "#5CAF56",
@@ -194,6 +217,7 @@ class Database{
                   lineJoin:'round'
               )
           );
+          existingLines.add(newLine);
         }
       }
     }catch(e){

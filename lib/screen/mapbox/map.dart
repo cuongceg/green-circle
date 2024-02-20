@@ -19,6 +19,7 @@ class _FullMapState extends State<FullMap> {
   String accessToken = "";
   late MapboxMapController mapController;
   MapboxMap? mapboxMap;
+  List<Line>existingLine=[];
 
   _onMapCreated(MapboxMapController controller){
     mapController=controller;
@@ -29,7 +30,7 @@ class _FullMapState extends State<FullMap> {
     showModalBottomSheet(
         context: context,
         builder:(BuildContext context){
-          return RecyclingLocationDetail(name: name,mapController: mapController,);
+          return RecyclingLocationDetail(name: name,mapController: mapController,existingLine: existingLine,);
         });
   }
 
@@ -137,7 +138,7 @@ class _FullMapState extends State<FullMap> {
                 left: 10,
                 top: 50,
                 child:IconButton(
-                  icon:Icon(Icons.arrow_back),
+                  icon:const Icon(Icons.arrow_back),
                   onPressed:(){
                     Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const ScreenOptions()));
                   },
@@ -156,7 +157,7 @@ class _FullMapState extends State<FullMap> {
                       IconButton(
                           icon:const Icon(Icons.directions,color:green1,size:35,),
                           onPressed: () {
-                            Database().getShortestPath(mapController);
+                            Database().getShortestPath(mapController,existingLine);
                           }
                       ),
                       IconButton(
