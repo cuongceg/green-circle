@@ -74,7 +74,9 @@ Running the app on mobile devices is recommended.
 ## Bugs and todo
 **Bugs:**
 * AppCheck token
+* Location package confict with mapbox_gl
+* Secret map token is ignored in gradle.properties (don't push Github)
+
 **Todo**
-* Payment feature([cart](lib/screen/e_cormmerce/cart.dart))
-* Push and get product data from Firebase ([StreamProvider](https://flutterbyexample.com/lesson/stream-provider)([database](lib/services/database.dart),[model](lib/models))
-* TODO comment in screen folder and service folder
+* Get current user location ([Location](https://pub.dev/packages/location))
+* Mark up button onPressed()
