@@ -7,6 +7,20 @@ class Category {
     required this.image,
     this.location,
   });
+  factory Category.fromJson(Map<String, dynamic> json) {
+    return Category(
+      title: json['title'],
+      image: json['image'],
+      location: json['location']
+    );
+  }
+  Map<String,dynamic> toJson(){
+    return{
+      "title":title,
+      "image":image,
+      "location":location
+    };
+  }
 }
 
 final List<Category> categories = [
