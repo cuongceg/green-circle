@@ -91,10 +91,10 @@ class _AddToCartState extends State<AddToCart> {
                                                     shape: BoxShape.circle,
                                                     color: currentColor == index
                                                         ? Colors.white
-                                                        : widget.product.colors[index],
+                                                        : Color(int.parse(widget.product.colors[index])),
                                                     border: currentColor == index
                                                         ? Border.all(
-                                                      color: widget.product.colors[index],
+                                                      color: Color(int.parse(widget.product.colors[index])),
                                                     )
                                                         : null,
                                                   ),
@@ -106,7 +106,7 @@ class _AddToCartState extends State<AddToCart> {
                                                     width: 30,
                                                     height: 30,
                                                     decoration: BoxDecoration(
-                                                      color: widget.product.colors[index],
+                                                      color: Color(int.parse(widget.product.colors[index])),
                                                       shape: BoxShape.circle,
                                                     ),
                                                   ),

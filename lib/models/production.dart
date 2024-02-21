@@ -1,13 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:green_circle/models/category.dart';
 
 class Product {
   double price, rate;
   int likedNumber, purchasesNumber;
   bool onSale;
-  final String title, description,label;
+  final String title, description,label,productId;
   final List<String> image;
-  final List<Color> colors;
+  final List<String> colors;
   final Category category;
 
   Product({
@@ -21,18 +20,20 @@ class Product {
     required this.colors,
     required this.category,
     required this.rate,
-    required this.label
+    required this.label,
+    required this.productId
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
     // Parse colors
-    List<Color> parsedColors = (json['colors'] as List<dynamic>)
-        .map((colorHex) => Color(int.parse(colorHex, radix: 16)))
+    List<String> parsedColors = (json['colors'] as List<dynamic>)
+        .map((colorHex) =>colorHex.toString())
         .toList();
     Category category = Category.fromJson(json['category']);
 
     return Product(
       price: json['price'],
+      productId: json['productId'],
       rate: json['rate'],
       label: json['label'],
       likedNumber: json['likedNumber'],
@@ -60,6 +61,7 @@ class Product {
       'category': category.toJson(),
     };
   }
+
 }
 
 
@@ -67,6 +69,7 @@ final List<Product> products = [
   Product(
     likedNumber: 300,
     purchasesNumber: 150,
+    productId: "123456789",
     label:"Technology",
     title: "Wireless Headphones",
     onSale: false,
@@ -75,9 +78,9 @@ final List<Product> products = [
     image: ["assets/images/wireless.png","assets/images/wireless.png","assets/images/wireless.png","assets/images/wireless.png","assets/images/wireless.png"],
     price: 120,
     colors: [
-      Colors.black,
-      Colors.blue,
-      Colors.orange,
+      '0xFF4CAF50',
+      '0xFF2196F3',
+      "0xFF000000"
     ],
     category: categories[0],
     rate: 4.8,
@@ -85,6 +88,7 @@ final List<Product> products = [
   Product(
     likedNumber: 300,
     purchasesNumber: 150,
+    productId:'123456798',
     title: "Woman Sweater",
     label: "Clothes",
     onSale: false,
@@ -93,14 +97,15 @@ final List<Product> products = [
     image:["assets/images/sweet.png","assets/images/sweet.png","assets/images/sweet.png","assets/images/sweet.png","assets/images/sweet.png"],
     price: 120,
     colors: [
-      Colors.brown,
-      Colors.red,
-      Colors.pink,
+      '0xFF4CAF50',
+      '0xFF2196F3',
+      "0xFF000000"
     ],
     category: categories[1],
     rate: 4.8,
   ),
   Product(
+    productId:'123456987',
     likedNumber: 300,
     purchasesNumber: 150,
     title: "Smart Watch",
@@ -111,7 +116,9 @@ final List<Product> products = [
     image: ["assets/images/miband.png","assets/images/miband.png","assets/images/miband.png","assets/images/miband.png","assets/images/miband.png"],
     price: 55,
     colors: [
-      Colors.black,
+      '0xFF4CAF50',
+      '0xFF2196F3',
+      "0xFF000000"
     ],
     category: categories[2],
     rate: 4.8,

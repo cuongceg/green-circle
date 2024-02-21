@@ -100,7 +100,7 @@ class MySignupState extends State<SignUp>{
                               }
                               else{
                                 // // create a profile base on unique uid
-                                await Database(uid:result.uid).updateData(UserInformation(name: fullName??"", voucherId:[],cartItems:[],boughtProduct:[],likedProduct:[],soldProduct:[]));
+                                await Database(uid:result.uid).updateUserData(UserInformation(name: fullName??"", voucherId:[],cartItems:[],boughtProduct:[],likedProduct:[],soldProduct:[]));
                                 final snackBar = SnackBar(
                                   backgroundColor:green1,
                                   content: Text('Sign up successfully',style:snackBarFonts,),
