@@ -2,7 +2,6 @@
 
 1. [How to run this project?](#how-to-run-this-project)
 2. [Folder structure](#folder-structure)
-3. [Bugs and todo](#bugs-and-todo)
 
 ## How to run this project?
 
@@ -71,12 +70,4 @@ Running the app on mobile devices is recommended.
 ├── README.md - This documents
 ```
 
-## Bugs and todo
-**Bugs:**
-* AppCheck token
-* Location package confict with mapbox_gl
-* Secret map token is ignored in gradle.properties (don't push Github)
 
-**Todo**
-* Get current user location ([Location](https://pub.dev/packages/location))
-* Mark up button onPressed()
