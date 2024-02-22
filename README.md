@@ -10,7 +10,7 @@
 1. Clone this repository:
 
 ```
-git clone https://github.com/cuongceg/meow-money.git
+git clone https://github.com/cuongceg/green-circle.git
 ```
 
 2. Install all dependencies (libraries):
