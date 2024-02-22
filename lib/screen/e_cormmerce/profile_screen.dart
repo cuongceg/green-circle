@@ -6,7 +6,6 @@ import 'package:green_circle/services/database.dart';
 import 'dart:math';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -17,7 +16,6 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   String? imageUrl;
-  DateFormat dateFormat=DateFormat('yyyyMMddhhmmss');
   String getRandom(int length){
     const ch = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
     Random r = Random();
@@ -44,10 +42,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child:Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircleAvatar(
-              backgroundImage:imageUrl!=null?NetworkImage(imageUrl!):const AssetImage('assets/images/logo.png') as ImageProvider,
-              radius: 40,
-            ),
             TextButton.icon(
               style: const ButtonStyle(
                   backgroundColor:MaterialStatePropertyAll<Color>(green1),
