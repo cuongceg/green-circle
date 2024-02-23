@@ -43,7 +43,6 @@ class _AddToCartState extends State<AddToCart> {
                       return BottomSheet(
                           onClosing: (){},
                           builder:(BuildContext context){
-                            int currentColor = 0;
                             int currentNumber = 1;
                             return StatefulBuilder(
                                 builder:(BuildContext context,setState){
@@ -70,49 +69,6 @@ class _AddToCartState extends State<AddToCart> {
                                             "Color",
                                             style: GoogleFonts.almarai(fontSize:18,fontWeight: FontWeight.bold),
                                             textAlign: TextAlign.left,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal:10),
-                                          child: Row(
-                                            children: List.generate(
-                                              widget.product.colors.length,
-                                                  (index) => GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    currentColor = index;
-                                                  });
-                                                },
-                                                child: AnimatedContainer(
-                                                  duration: const Duration(milliseconds: 300),
-                                                  width: 40,
-                                                  height: 40,
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: currentColor == index
-                                                        ? Colors.white
-                                                        : Color(int.parse(widget.product.colors[index])),
-                                                    border: currentColor == index
-                                                        ? Border.all(
-                                                      color: Color(int.parse(widget.product.colors[index])),
-                                                    )
-                                                        : null,
-                                                  ),
-                                                  padding: currentColor == index
-                                                      ? const EdgeInsets.all(2)
-                                                      : null,
-                                                  margin: const EdgeInsets.only(right: 15),
-                                                  child: Container(
-                                                    width: 30,
-                                                    height: 30,
-                                                    decoration: BoxDecoration(
-                                                      color: Color(int.parse(widget.product.colors[index])),
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
                                           ),
                                         ),
                                         Padding(
