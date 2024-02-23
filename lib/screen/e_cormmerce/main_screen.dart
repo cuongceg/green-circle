@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
+import 'package:green_circle/screen/e_cormmerce/add_product.dart';
 import 'package:green_circle/screen/e_cormmerce/cart.dart';
 import 'package:green_circle/screen/e_cormmerce/profile_screen.dart';
 import 'package:green_circle/widgets/e_cormmerce/nav_bar.dart';
@@ -16,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   List screens = const [
     NavBar(),
     Scaffold(),
-    Scaffold(),
+    AddProduct(),
     CartScreen(),
     ProfileScreen(),
   ];
