@@ -21,6 +21,13 @@ class Category {
       "location":location
     };
   }
+  Map<String, dynamic> toMap() {
+    return {
+      "title":title,
+      "image":image,
+      "location":location
+    };
+  }
 }
 
 final List<Category> categories = [

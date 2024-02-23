@@ -12,29 +12,11 @@ import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:dio/dio.dart';
 import 'dart:math';
 
-// TODO: add new stream to get data.
-/*
-Example:
-List<UserInformation>_authDataFromSnapshot(QuerySnapshot snapshot){
-    return snapshot.docs.map((doc){
-      return UserInformation(
-        username:doc.data().toString().contains('username')?doc.get('username'):" ",
-        fullname:doc.data().toString().contains('fullname')?doc.get('fullname'):" ",
-        asset:doc.data().toString().contains('assets')?doc.get('assets'):" ",
-        uid:doc.data().toString().contains('uid')?doc.get('uid'):" ",
-    );//UserInformation is a class in model
-    }).toList();
-  }
-
-  Stream<List<UserInformation>> get authData{
-    return userCollection.snapshots().map((_authDataFromSnapshot));
-  }
- */
 class Database{
   String? uid;
   Database({this.uid});
   final CollectionReference userCollection=FirebaseFirestore.instance.collection('user');
-  final CollectionReference productionCollection=FirebaseFirestore.instance.collection('production');
+  final CollectionReference productionCollection=FirebaseFirestore.instance.collection('product');
   final CollectionReference cartItemsCollection=FirebaseFirestore.instance.collection('cart_items');
   final CollectionReference categoryCollection=FirebaseFirestore.instance.collection('category');
   //update and get stream user information data
@@ -87,8 +69,7 @@ class Database{
   Future updateProductData(Product product,String productId) async{
     try{
       return await productionCollection.doc(productId).set({
-        "category":product.category,
-        "colors":product.colors,
+        "category":product.category.toMap(),
         "description":product.description,
         "image":product.image,
         "label":product.label,
@@ -98,7 +79,8 @@ class Database{
         "purchasesNumber":product.purchasesNumber,
         "productId":productId,
         "rate":product.rate,
-        "title":product.title
+        "title":product.title,
+        "remain":product.remain
       });
     }
     catch(e){
@@ -110,17 +92,15 @@ class Database{
     return snapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       return Product(
+        category: Category.fromJson(data['category'] ?? {}),
         likedNumber: data['likedNumber'] ?? 0,
         purchasesNumber: data['purchasesNumber'] ?? 0,
+        remain: data['remain'] ?? 0,
         onSale: data['onSale'] ?? false,
         title: data['title'] ?? "",
         description: data['description'] ?? "",
         image: List<String>.from(data['image'] ?? []),
         price: data['price'] ?? 0.0,
-        colors: (data['colors'] as List<dynamic>?)
-            ?.map((colorHex) => colorHex.toString())
-            .toList() ?? [],
-        category: Category.fromJson(data['category'] ?? {}),
         rate: data['rate'] ?? 0.0,
         label: data['label'] ?? "",
         productId: doc.id,
@@ -193,67 +173,6 @@ class Database{
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
-
-  Future<void> uploadImagesFromGallery(BuildContext context,String imageUrl,String id)async{
-    final userRef= storageRef.child(imageUrl);
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if(pickedFile != null){
-      File? file = File(pickedFile.path);
-      UploadTask uploadTask= userRef.putFile(file);
-      final snackBar = SnackBar(
-        backgroundColor:green1,
-        content:Text('Upload successfully',style:snackBarFonts),
-      );
-      await uploadTask.whenComplete(() async {
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        try {
-          String imageUrl = await userRef.getDownloadURL();
-          // Update the imageUrl field in Firestore
-          await userCollection.doc(id).update({'imageUrl': imageUrl});
-        } catch (e) {
-          debugPrint("Error getting download URL: $e");
-        }
-      });
-    }
-    else{
-      final snackBar = SnackBar(
-        backgroundColor:red,
-        content:Text('Please select an image from gallery',style:snackBarFonts),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-  }
-
-  Future<void> uploadImagesFromCamera(BuildContext context,String imageUrl)async{
-    final userRef= storageRef.child(imageUrl);
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
-    if(pickedFile != null){
-      File? file = File(pickedFile.path);
-      UploadTask uploadTask= userRef.putFile(file);
-      final snackBar = SnackBar(
-        backgroundColor:green1,
-        content:Text('Upload successfully',style:snackBarFonts),
-      );
-      await uploadTask.whenComplete(() async {
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        try {
-          String imageUrl = await userRef.getDownloadURL();
-          // Update the imageUrl field in Firestore
-          await userCollection.doc(uid).update({'imageUrl': imageUrl});
-        } catch (e) {
-          debugPrint("Error getting download URL: $e");
-        }
-      });
-    }
-    else{
-      final snackBar = SnackBar(
-        backgroundColor:red,
-        content:Text('Please select an image from camera',style:snackBarFonts),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-  }
-
 
   //database direction to recycling locations
   Future getShortestPath(MapboxMapController mapController,List<Line> existingLines)async{
