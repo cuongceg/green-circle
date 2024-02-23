@@ -97,7 +97,7 @@ class _AddProductState extends State<AddProduct> {
             const SizedBox(
               height: 15,
             ),
-            Text("Please choose to add at most 3 more product photos of the product to help users better understand it",style:body1Black,),
+            Text("Please choose to add at most 6 more product photos of the product to help users better understand it",style:body1Black,),
             const SizedBox(
               height: 10,
             ),
@@ -121,6 +121,32 @@ class _AddProductState extends State<AddProduct> {
                       tapImages();
                     },
                     child:addImages(imagesPath.length>2?imagesPath[2]:null,2)
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      tapImages();
+                    },
+                    child:addImages(imagesPath.length>3?imagesPath[3]:null,3)
+                ),
+                GestureDetector(
+                    onTap: () {
+                      tapImages();
+                    },
+                    child:addImages(imagesPath.length>4?imagesPath[4]:null,4)
+                ),
+                GestureDetector(
+                    onTap: () {
+                      tapImages();
+                    },
+                    child:addImages(imagesPath.length>5?imagesPath[5]:null,5)
                 ),
               ],
             ),
@@ -180,6 +206,15 @@ class _AddProductState extends State<AddProduct> {
                         content: Text('Upload successfully', style: snackBarFonts),
                       );
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      titleEditingController.clear();
+                      labelEditingController.clear();
+                      descriptionEditingController.clear();
+                      priceEditingController.clear();
+                      remainEditingController.clear();
+                      setState(() {
+                        imagesPath.removeRange(0,imagesPath.length);
+                        imagesUrl.removeRange(0,imagesUrl.length);
+                      });
                     }
                   },
                   child:Text(
