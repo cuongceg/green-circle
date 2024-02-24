@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
+import 'package:green_circle/screen/e_cormmerce/cart.dart';
 import 'package:green_circle/models/production.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -47,7 +48,7 @@ class _AddToCartState extends State<AddToCart> {
                             return StatefulBuilder(
                                 builder:(BuildContext context,setState){
                                   return Container(
-                                    height:height/2.3,
+                                    height:height/2.6,
                                     color: Colors.white,
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.start,
@@ -55,11 +56,11 @@ class _AddToCartState extends State<AddToCart> {
                                       children: [
                                         Row(
                                           children: [
-                                            Image.asset(widget.product.image[0],height:150,width:150,),
+                                            Image.network(widget.product.image[0],height:150,width:150,),
                                             Expanded(
                                                 child:ListTile(
                                                   title:Text("\$${widget.product.price}",style:title2,),
-                                                  subtitle:Text("Remain:20",style:body1Black,),
+                                                  subtitle:Text("Remain:${widget.product.remain}",style:body1Black,),
                                                 ))
                                           ],
                                         ),
@@ -141,7 +142,12 @@ class _AddToCartState extends State<AddToCart> {
             color:green1,
             width:width/2.3,
             child:Center(
-                child:Text("Buy with voucher",style:GoogleFonts.almarai(color:Colors.white,fontSize:18),)
+                child:TextButton(
+                  onPressed: (){
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const CartScreen()));
+                  },
+                  child: Text("Buy with voucher",style:GoogleFonts.almarai(color:Colors.white,fontSize:18),
+                ),)
             ),
           )
         ],

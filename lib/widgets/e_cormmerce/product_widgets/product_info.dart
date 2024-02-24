@@ -61,8 +61,8 @@ class ProductInfo extends StatelessWidget {
                 ),
               ),
               const SizedBox(width:15),
-              const Text(
-                "Sold 20 products",
+              Text(
+                "Sold ${product.purchasesNumber} products",
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 14,
