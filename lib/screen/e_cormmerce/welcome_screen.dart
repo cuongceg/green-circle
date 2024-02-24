@@ -30,7 +30,7 @@ class WelcomePage extends StatelessWidget {
                 children:[
                   Positioned(
                     top: 100,
-                    left: 70,
+                    left: 60,
                     child: FadeInDownBig(
                       delay: const Duration(milliseconds: 200),
                       duration: const Duration(milliseconds: 1500),
