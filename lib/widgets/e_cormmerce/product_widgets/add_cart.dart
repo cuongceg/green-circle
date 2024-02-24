@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
-import 'package:green_circle/screen/e_cormmerce/cart.dart';
 import 'package:green_circle/models/production.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:green_circle/screen/e_cormmerce/check_out_screen.dart';
 
 class AddToCart extends StatefulWidget {
   final Product product;
@@ -13,10 +13,10 @@ class AddToCart extends StatefulWidget {
 }
 
 class _AddToCartState extends State<AddToCart> {
+  int quantity=1;
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Container(
       height: 60,
       decoration: BoxDecoration(
@@ -48,7 +48,7 @@ class _AddToCartState extends State<AddToCart> {
                             return StatefulBuilder(
                                 builder:(BuildContext context,setState){
                                   return Container(
-                                    height:height/2.6,
+                                    height:280,
                                     color: Colors.white,
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.start,
@@ -63,14 +63,6 @@ class _AddToCartState extends State<AddToCart> {
                                                   subtitle:Text("Remain:${widget.product.remain}",style:body1Black,),
                                                 ))
                                           ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal:10,vertical: 15),
-                                          child: Text(
-                                            "Color",
-                                            style: GoogleFonts.almarai(fontSize:18,fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.left,
-                                          ),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.symmetric(horizontal:10,vertical: 15),
@@ -143,8 +135,97 @@ class _AddToCartState extends State<AddToCart> {
             width:width/2.3,
             child:Center(
                 child:TextButton(
-                  onPressed: (){
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const CartScreen()));
+                  onPressed:(){
+                    showModalBottomSheet(
+                        context: context,
+                        builder:(BuildContext context){
+                          return BottomSheet(
+                              onClosing: (){},
+                              builder:(BuildContext context){
+                                return StatefulBuilder(
+                                    builder:(BuildContext context,setState){
+                                      return Container(
+                                        height:280,
+                                        color: Colors.white,
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Image.network(widget.product.image[0],height:150,width:150,),
+                                                Expanded(
+                                                    child:ListTile(
+                                                      title:Text("\$${widget.product.price}",style:title2,),
+                                                      subtitle:Text("Remain:${widget.product.remain}",style:body1Black,),
+                                                    ))
+                                              ],
+                                            ),
+                                            Padding(
+                                                padding: const EdgeInsets.symmetric(horizontal:10,vertical: 15),
+                                                child:Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      "Quantity",
+                                                      style: GoogleFonts.almarai(fontSize:18,fontWeight: FontWeight.bold),
+                                                      textAlign: TextAlign.left,
+                                                    ),
+                                                    Container(
+                                                      height:40,
+                                                      decoration:BoxDecoration(
+                                                        border:Border.all(color:mediumGray,width:1.5),
+                                                      ),
+                                                      child:Row(
+                                                        children: [
+                                                          IconButton(
+                                                              onPressed:(){
+                                                                if(quantity>1){
+                                                                  setState((){
+                                                                    quantity--;
+                                                                  });
+                                                                }
+                                                              },
+                                                              icon:const Icon(Icons.remove,color:mediumGray,)),
+                                                          Text("$quantity",style:label,),
+                                                          IconButton(
+                                                              onPressed:(){
+                                                                if(quantity<widget.product.remain){
+                                                                  setState((){
+                                                                    quantity++;
+                                                                  });
+                                                                }
+                                                              },
+                                                              icon:const Icon(Icons.add,color:Colors.black54,))
+                                                        ],
+                                                      ),
+                                                    )
+                                                  ],
+                                                )
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.symmetric(horizontal:10),
+                                              child: Container(
+                                                height: 45,
+                                                width: width-20,
+                                                color: green1,
+                                                child: Center(
+                                                    child: TextButton(
+                                                      child: Text("Add cart",style:GoogleFonts.almarai(color:Colors.white,fontSize:20),),
+                                                      onPressed:(){
+                                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CheckOutScreen(product: widget.product,quantity:quantity,)));
+                                                      },
+                                                    )),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    }
+                                );
+                              });
+                        }
+                    );
                   },
                   child: Text("Buy with voucher",style:GoogleFonts.almarai(color:Colors.white,fontSize:18),
                 ),)
