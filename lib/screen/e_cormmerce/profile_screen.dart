@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/models/user.dart';
 import 'package:green_circle/services/auth_services.dart';
-import 'package:green_circle/services/database.dart';
 import 'dart:math';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:dio/dio.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -23,9 +25,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
         length, (_) => ch.codeUnitAt(r.nextInt(ch.length))));
   }
   int productId= 1;
+  // late ClassificationResult _classificationResult;
+  File? _image;
+  Future<void> classifyImage() async {
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if(pickedFile!=null){
+      // List<int> imageBytes = await pickedFile.readAsBytes();
+      // String imageData = base64Encode(imageBytes);
+      setState(() {
+        _image=File(pickedFile.path);
+      });
+    }
+    FormData formData=FormData.fromMap({
+      'image':await MultipartFile.fromFile(_image!.path,filename: 'upload.jpg',),
+    });
+    try{
+      Dio dio =Dio();
+      Response response=await dio.post("https://detect.roboflow.com/green002/1?api_key=KyfqRDG7dsGUbfwoT65T",data:formData);
+      debugPrint("${response.statusCode}");
+    }catch(e){
+      debugPrint("$e");
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    final user=Provider.of<MyUser?>(context);
     final userInformation=Provider.of<List<UserInformation>?>(context);
     double width=MediaQuery.of(context).size.width;
     double height=MediaQuery.of(context).size.height;
@@ -33,7 +56,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
        imageUrl=userInformation[0].imageUrl;
        // debugPrint(imageUrl??"");
     }
-
     return Scaffold(
       backgroundColor: Colors.white,
       body:SizedBox(
@@ -56,26 +78,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             // button upload image to Firebase Storage
             IconButton(
                 onPressed:(){
-                  Database(uid:user!.uid).uploadImageFromGallery(context,"$productId/${getRandom(10)}");
+                  classifyImage();
                 },
                 icon: const Icon(Icons.image)),
-            IconButton(
-                onPressed:(){
-                  Database(uid:user!.uid).uploadImageFromCamera(context,"$productId/${getRandom(10)}");
-                },
-                icon: const Icon(Icons.camera)),
-            IconButton(
-                onPressed:(){
-                  setState(() {
-                    productId++;
-                  });
-                },
-                icon: const Icon(Icons.save_alt)),
-            // IconButton(
-            //     onPressed:(){
-            //       Database(uid:user!.uid).up;
-            //     },
-            //     icon: const Icon(Icons.camera)),
           ],
         )
       ),
