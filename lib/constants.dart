@@ -16,6 +16,7 @@ BorderSide borderSideWhite=const BorderSide(color: Colors.white);
 TextStyle heading1=GoogleFonts.outfit(fontSize: 55,color:green2,fontWeight:FontWeight.w700);
 TextStyle heading2=GoogleFonts.outfit(fontSize: 40,color: Colors.black,fontWeight:FontWeight.w700);
 TextStyle heading2Green=GoogleFonts.outfit(fontSize: 40,color:green1,fontWeight:FontWeight.w700);
+TextStyle heading3=GoogleFonts.outfit(fontSize: 35,color: Colors.black,fontWeight:FontWeight.w700);
 TextStyle title1=GoogleFonts.almarai(fontSize:28,color:green1,fontWeight:FontWeight.w700);
 TextStyle title2=GoogleFonts.almarai(fontSize:22,color:green1,fontWeight:FontWeight.w700);
 TextStyle title2Black=GoogleFonts.almarai(fontSize:22,color:Colors.black,fontWeight:FontWeight.w700);
