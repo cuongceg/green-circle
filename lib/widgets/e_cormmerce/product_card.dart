@@ -45,7 +45,7 @@ class ProductCard extends StatelessWidget {
                 children: [
                   Padding(
                     padding:const EdgeInsets.only(left:10.0),
-                    child: Text("\$${product.price}",style:body1Black,),
+                    child: Text("${product.price.toStringAsFixed(0)} 000",style:body1Black,),
                   ),
                   TextButton.icon(
                       onPressed:(){},
@@ -91,7 +91,7 @@ class ProductCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left:10.0),
                       child: Text(
-                          "\$${product.price}",
+                          "${product.price.toStringAsFixed(0)} 000",
                           style: body1Black
                       ),
                     ),
