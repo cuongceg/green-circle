@@ -6,8 +6,8 @@ import 'dart:math';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:dio/dio.dart';
-import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:http_parser/http_parser.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -25,26 +25,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
         length, (_) => ch.codeUnitAt(r.nextInt(ch.length))));
   }
   int productId= 1;
-  // late ClassificationResult _classificationResult;
-  File? _image;
   Future<void> classifyImage() async {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
     if(pickedFile!=null){
-      // List<int> imageBytes = await pickedFile.readAsBytes();
-      // String imageData = base64Encode(imageBytes);
-      setState(() {
-        _image=File(pickedFile.path);
+      List<int> imageBytes = await pickedFile.readAsBytes();
+      FormData formData=FormData.fromMap({
+        'image':MultipartFile.fromBytes(
+          imageBytes,
+          filename: 'upload.jpg',
+          contentType:MediaType('image', 'jpg'),
+        ),
       });
-    }
-    FormData formData=FormData.fromMap({
-      'image':await MultipartFile.fromFile(_image!.path,filename: 'upload.jpg',),
-    });
-    try{
-      Dio dio =Dio();
-      Response response=await dio.post("https://detect.roboflow.com/green002/1?api_key=KyfqRDG7dsGUbfwoT65T",data:formData);
-      debugPrint("${response.statusCode}");
-    }catch(e){
-      debugPrint("$e");
+      try{
+        Dio dio =Dio();
+        Response response=await dio.post("https://detect.roboflow.com/green002/1?api_key=KyfqRDG7dsGUbfwoT65T",data:formData);
+        debugPrint("${response.statusCode}");
+      }catch(e){
+        debugPrint("$e");
+      }
     }
   }
   @override
