@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/screen/e_cormmerce/home.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:green_circle/screen/screen_options.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -21,8 +22,10 @@ class _NavBarState extends State<NavBar> {
             backgroundColor: Colors.white,
             forceMaterialTransparency:true,
             leading:IconButton(
-              icon: const Icon(Icons.menu_outlined,size: 30,),
-              onPressed:(){},
+              icon: const Icon(Icons.arrow_back,size: 30,),
+              onPressed:(){
+                Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const ScreenOptions()));
+              },
             ),
             actions: [
               IconButton(
