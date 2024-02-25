@@ -53,7 +53,7 @@ class _MeScreenState extends State<MeScreen> {
         });
       }
     } catch (e) {
-      print("Error loading user data: $e");
+      debugPrint("Error loading user data: $e");
     }
   }
 
@@ -93,7 +93,7 @@ class _MeScreenState extends State<MeScreen> {
           .doc(userId)
           .set({'image_url': imageUrl}, SetOptions(merge: true));
     } catch (e) {
-      print("Error saving image URL to Firestore: $e");
+      debugPrint("Error saving image URL to Firestore: $e");
     }
   }
 
@@ -109,7 +109,7 @@ class _MeScreenState extends State<MeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   children: [
                     GestureDetector(
@@ -122,16 +122,16 @@ class _MeScreenState extends State<MeScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   ListTile(
-                                    leading: Icon(Icons.camera),
-                                    title: Text('Take a photo'),
+                                    leading: const Icon(Icons.camera),
+                                    title: const Text('Take a photo'),
                                     onTap: () {
                                       _getImage(ImageSource.camera);
                                       Navigator.pop(context);
                                     },
                                   ),
                                   ListTile(
-                                    leading: Icon(Icons.photo),
-                                    title: Text('Choose from gallery'),
+                                    leading: const Icon(Icons.photo),
+                                    title: const Text('Choose from gallery'),
                                     onTap: () {
                                       _getImage(ImageSource.gallery);
                                       Navigator.pop(context);
@@ -159,7 +159,7 @@ class _MeScreenState extends State<MeScreen> {
                                   fit: BoxFit.cover,
                                 ),
                               )
-                            : Center(
+                            : const Center(
                                 child: Icon(
                                   Icons.person,
                                   size: 50,
@@ -168,14 +168,14 @@ class _MeScreenState extends State<MeScreen> {
                               ),
                       ),
                     ),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: green1,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: Text(
+                      child: const Text(
                         "My Activity",
                         style: TextStyle(
                           fontSize: 16,
@@ -184,10 +184,10 @@ class _MeScreenState extends State<MeScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 90),
+                    const SizedBox(width: 90),
                     Container(
-                      margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.all(5),
+                      margin: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
@@ -197,7 +197,7 @@ class _MeScreenState extends State<MeScreen> {
                       ),
                       child: IconButton(
                         onPressed: () {},
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.menu,
                           size: 30,
                           color: green1,
@@ -206,32 +206,32 @@ class _MeScreenState extends State<MeScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   "Hello, $userName!!",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       width: 100,
                       height: 100,
-                      margin: EdgeInsets.only(right: 20),
+                      margin: const EdgeInsets.only(right: 20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           image: AssetImage('assets/images/iconme1.png'),
                           fit: BoxFit.cover,
                         ),
                       ),
                     ),
-                    Flexible(
+                    const Flexible(
                       flex: 1,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -257,8 +257,8 @@ class _MeScreenState extends State<MeScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   "My Wallet",
                   style: TextStyle(
                     fontSize: 21,
@@ -266,7 +266,7 @@ class _MeScreenState extends State<MeScreen> {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -275,7 +275,7 @@ class _MeScreenState extends State<MeScreen> {
                       child: Container(
                         width: 70,
                         height: 70,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
                         ),
@@ -287,7 +287,7 @@ class _MeScreenState extends State<MeScreen> {
                               width: 40,
                               height: 40,
                             ),
-                            Text(
+                            const Text(
                               "MOMO",
                               style: TextStyle(
                                 fontSize: 12,
@@ -304,7 +304,7 @@ class _MeScreenState extends State<MeScreen> {
                       child: Container(
                         width: 70,
                         height: 70,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             shape: BoxShape.circle, color: Colors.white),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -314,7 +314,7 @@ class _MeScreenState extends State<MeScreen> {
                               width: 40,
                               height: 40,
                             ),
-                            Text(
+                            const Text(
                               "VNPAY",
                               style: TextStyle(
                                 fontSize: 12,
@@ -331,7 +331,7 @@ class _MeScreenState extends State<MeScreen> {
                       child: Container(
                         width: 70,
                         height: 70,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
                         ),
@@ -343,7 +343,7 @@ class _MeScreenState extends State<MeScreen> {
                               width: 40,
                               height: 40,
                             ),
-                            Text(
+                            const Text(
                               "ZALOPAY",
                               style: TextStyle(
                                 fontSize: 12,
@@ -357,8 +357,8 @@ class _MeScreenState extends State<MeScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   "My Purchases",
                   style: TextStyle(
                     fontSize: 21,
@@ -366,17 +366,17 @@ class _MeScreenState extends State<MeScreen> {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: green5,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: Text(
+                      child: const Text(
                         "To Pay",
                         style: TextStyle(
                           fontSize: 16,
@@ -386,12 +386,12 @@ class _MeScreenState extends State<MeScreen> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: green5,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: Text(
+                      child: const Text(
                         "To Ship",
                         style: TextStyle(
                           fontSize: 16,
@@ -401,12 +401,12 @@ class _MeScreenState extends State<MeScreen> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: green5,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: Text(
+                      child: const Text(
                         "To Receive",
                         style: TextStyle(
                           fontSize: 16,
@@ -416,12 +416,12 @@ class _MeScreenState extends State<MeScreen> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: green5,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: Text(
+                      child: const Text(
                         "To Rate",
                         style: TextStyle(
                           fontSize: 16,
@@ -432,8 +432,8 @@ class _MeScreenState extends State<MeScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   "Buy Again",
                   style: TextStyle(
                     fontSize: 21,

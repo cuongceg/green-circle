@@ -175,7 +175,7 @@ class _FullMapState extends State<FullMap> {
                           key: locationButton,
                           icon:const Icon(Icons.location_on,color:green1,size:35,),
                           onPressed: () {
-                            mapController.animateCamera(CameraUpdate.zoomBy(-3.5));
+                            mapController.animateCamera(CameraUpdate.zoomBy(-3));
                           }
                       ),
                       IconButton(

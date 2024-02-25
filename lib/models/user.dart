@@ -7,7 +7,8 @@ class MyUser{
 }
 
 class UserInformation{
-  String name,voucherId;
+  String name;
+  List<String>voucherId;
   String? imageUrl;
   List<CartItem>? cartItems;
   List<Product>? boughtProduct;

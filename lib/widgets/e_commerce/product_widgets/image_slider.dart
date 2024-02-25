@@ -15,11 +15,18 @@ class ImageSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 250,
+      width: MediaQuery.of(context).size.width,
       child: PageView.builder(
         itemCount: image.length,
         onPageChanged: onChange,
         itemBuilder: (context, index) {
-          return Image.asset(image[index]);
+          return Container(
+            height: 250,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(image:NetworkImage(image[index],),fit:BoxFit.contain)
+            ),
+          );
         },
       ),
     );

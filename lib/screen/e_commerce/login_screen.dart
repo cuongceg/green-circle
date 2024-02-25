@@ -132,7 +132,7 @@ class _LoginState extends State<Login> {
                     onPressed:()async{
                       if(_formKey.currentState!.validate()){
                         MyUser? result =await authService.signInEmailAndPassword(email, password);
-                        print(result);
+                        debugPrint('$result');
                         if(result == null){
                           final snackBar = SnackBar(
                             backgroundColor:red,

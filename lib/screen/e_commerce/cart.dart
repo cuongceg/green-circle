@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:green_circle/widgets/e_commerce/checkout_box.dart';
 import 'package:green_circle/widgets/e_commerce/cart_tiles.dart';
 import 'package:green_circle/models/cart_item.dart';
-//TODO(cuongceg): checkout screen
+
+
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
-
   @override
   State<CartScreen> createState() => _CartScreenState();
 }
@@ -28,7 +28,9 @@ class _CartScreenState extends State<CartScreen> {
         leading: Padding(
           padding: const EdgeInsets.only(left: 5),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             style: IconButton.styleFrom(
               backgroundColor: Colors.white,
             ),

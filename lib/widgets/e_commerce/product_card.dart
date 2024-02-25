@@ -30,16 +30,14 @@ class ProductCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Hero(
-                tag: "${product.title} sale",
-                child: Image.asset(
+              Image.network(
                   product.image[0],
                   width: 170,
                   height: 100,
+                fit: BoxFit.contain,
                 ),
-              ),
               Padding(
-                padding: const EdgeInsets.only(left:10,bottom:8),
+                padding: const EdgeInsets.only(left:10,top: 0),
                 child: Text(product.title,style:body1Black,),
               ),
               Row(
@@ -47,7 +45,7 @@ class ProductCard extends StatelessWidget {
                 children: [
                   Padding(
                     padding:const EdgeInsets.only(left:10.0),
-                    child: Text("\$${product.price}",style:body1Black,),
+                    child: Text("${product.price.toStringAsFixed(0)} 000",style:body1Black,),
                   ),
                   TextButton.icon(
                       onPressed:(){},
@@ -76,13 +74,11 @@ class ProductCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Hero(
-                tag: product.title,
-                child: Image.asset(
-                  product.image[0],
-                  width: 170,
-                  height: 125,
-                ),
+              Image.network(
+                product.image[0],
+                width: 170,
+                height: 125,
+                fit: BoxFit.fitHeight,
               ),
               Padding(
                 padding: const EdgeInsets.only(left:10),
@@ -95,7 +91,7 @@ class ProductCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left:10.0),
                       child: Text(
-                          "\$${product.price}",
+                          "${product.price.toStringAsFixed(0)} 000",
                           style: body1Black
                       ),
                     ),
