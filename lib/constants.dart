@@ -26,6 +26,7 @@ TextStyle title3Black=GoogleFonts.almarai(fontSize:18,color:Colors.black,fontWei
 TextStyle body1Green=GoogleFonts.almarai(fontSize:14,color:green1,fontWeight:FontWeight.w500);
 TextStyle body1Black=GoogleFonts.almarai(fontSize:14,color:Colors.black,fontWeight:FontWeight.w500);
 TextStyle label=GoogleFonts.outfit(fontSize: 15,fontWeight:FontWeight.w500);
+TextStyle labelGreen=GoogleFonts.outfit(fontSize: 15,color: green1,fontWeight:FontWeight.w500);
 TextStyle price1=GoogleFonts.almarai(fontSize: 25,color:green1,fontWeight:FontWeight.w700);
 TextStyle snackBarFonts=GoogleFonts.almarai(fontSize:15,fontWeight:FontWeight.w400,color:Colors.white);
 TextStyle subTitleFonts=GoogleFonts.almarai(fontSize:13,fontWeight:FontWeight.w400,color:Colors.grey);
