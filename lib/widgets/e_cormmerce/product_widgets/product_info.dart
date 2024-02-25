@@ -14,7 +14,7 @@ class ProductInfo extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical:5,horizontal:15),
           child: Text(
-            "\$${product.price}",
+            "${product.price.toStringAsFixed(0)} 000",
             style: price1,
           ),
         ),
@@ -63,7 +63,7 @@ class ProductInfo extends StatelessWidget {
               const SizedBox(width:15),
               Text(
                 "Sold ${product.purchasesNumber} products",
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 14,
                 ),
