@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
-import 'package:green_circle/widgets/e_cormmerce/product_card.dart';
 import 'package:green_circle/models/production.dart';
+import 'package:green_circle/widgets/e_commerce/product_card.dart';
 import 'package:badges/badges.dart'as badges;
 import 'package:provider/provider.dart';
 

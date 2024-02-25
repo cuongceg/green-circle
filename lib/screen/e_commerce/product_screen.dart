@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/models/production.dart';
-import 'package:green_circle/widgets/e_cormmerce/product_widgets/coupon_card.dart';
-import 'package:green_circle/widgets/e_cormmerce/product_widgets/image_slider.dart';
-import 'package:green_circle/widgets/e_cormmerce/product_widgets/product_info.dart';
-import 'package:green_circle/widgets/e_cormmerce/product_widgets/add_cart.dart';
-import 'package:green_circle/widgets/e_cormmerce/product_widgets/appbar.dart';
+import 'package:green_circle/widgets/e_commerce/product_widgets/coupon_card.dart';
+import 'package:green_circle/widgets/e_commerce/product_widgets/image_slider.dart';
+import 'package:green_circle/widgets/e_commerce/product_widgets/product_info.dart';
+import 'package:green_circle/widgets/e_commerce/product_widgets/add_cart.dart';
+import 'package:green_circle/widgets/e_commerce/product_widgets/appbar.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductScreen extends StatefulWidget {

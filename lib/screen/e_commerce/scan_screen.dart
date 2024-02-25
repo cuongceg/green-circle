@@ -1,9 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green_circle/constants.dart';
-import 'package:green_circle/screen/e_cormmerce/add_product.dart';
+import 'package:green_circle/screen/e_commerce/add_product.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 

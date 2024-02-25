@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
-import 'package:green_circle/screen/e_cormmerce/home.dart';
+import 'package:green_circle/screen/e_commerce/home.dart';
 import 'package:badges/badges.dart' as badges;
-import 'package:green_circle/screen/e_cormmerce/search_screen.dart';
+import 'package:green_circle/screen/e_commerce/search_screen.dart';
 import 'package:green_circle/screen/screen_options.dart';
 
 class NavBar extends StatefulWidget {

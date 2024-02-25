@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
-import 'package:green_circle/screen/e_cormmerce/sign_up_screen.dart';
+import 'package:green_circle/screen/e_commerce/sign_up_screen.dart';
 import 'package:green_circle/services/auth_services.dart';
 import 'package:green_circle/models/user.dart';
 import 'wrapper.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:green_circle/models/production.dart';
-import 'package:green_circle/screen/e_cormmerce/welcome_screen.dart';
+import 'package:green_circle/screen/e_commerce/welcome_screen.dart';
 import 'package:green_circle/models/user.dart';
 import 'package:green_circle/services/auth_services.dart';
 import 'package:green_circle/services/database.dart';

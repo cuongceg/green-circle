@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/models/production.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:green_circle/screen/e_cormmerce/check_out_screen.dart';
+import 'package:green_circle/screen/e_commerce/check_out_screen.dart';
 
 class AddToCart extends StatefulWidget {
   final Product product;
