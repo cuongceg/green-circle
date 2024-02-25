@@ -5,6 +5,7 @@ const green1 = Color(0xFF5CAF56);
 const green2 = Color(0xFF092313);
 const green3 = Color(0xFFAED038);
 const green4 = Color(0xFF5DB075);
+const green5 = Color(0xfff0fff1);
 const greenGray= Color(0xFFA7BEAE);
 const mediumGray= Color(0xFFDCE0D5);
 const lightGray= Color(0xFFF3F3F3);

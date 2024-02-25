@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:green_circle/screen/e_cormmerce/main_screen.dart';
+import 'package:green_circle/screen/e_commerce/main_screen.dart';
 import 'package:green_circle/screen/mapbox/map.dart';
 import 'package:green_circle/constants.dart';
 import 'package:permission_handler/permission_handler.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:green_circle/widgets/e_cormmerce/checkout_box.dart';
-import 'package:green_circle/widgets/e_cormmerce/cart_tiles.dart';
+import 'package:green_circle/widgets/e_commerce/checkout_box.dart';
+import 'package:green_circle/widgets/e_commerce/cart_tiles.dart';
 import 'package:green_circle/models/cart_item.dart';
 //TODO(cuongceg): checkout screen
 class CartScreen extends StatefulWidget {
