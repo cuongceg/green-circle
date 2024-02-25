@@ -156,7 +156,7 @@ class _AddToCartState extends State<AddToCart> {
                                                 Image.network(widget.product.image[0],height:150,width:150,),
                                                 Expanded(
                                                     child:ListTile(
-                                                      title:Text("\$${widget.product.price}",style:title2,),
+                                                      title:Text("${widget.product.price.toStringAsFixed(0)} 000",style:title2,),
                                                       subtitle:Text("Remain:${widget.product.remain}",style:body1Black,),
                                                     ))
                                               ],
@@ -211,7 +211,7 @@ class _AddToCartState extends State<AddToCart> {
                                                 color: green1,
                                                 child: Center(
                                                     child: TextButton(
-                                                      child: Text("Add cart",style:GoogleFonts.almarai(color:Colors.white,fontSize:20),),
+                                                      child: Text("Buy with voucher",style:GoogleFonts.almarai(color:Colors.white,fontSize:20),),
                                                       onPressed:(){
                                                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CheckOutScreen(product: widget.product,quantity:quantity,)));
                                                       },
