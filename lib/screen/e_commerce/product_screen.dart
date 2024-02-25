@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/models/production.dart';
-import 'package:green_circle/widgets/e_cormmerce/product_widgets/coupon_card.dart';
-import 'package:green_circle/widgets/e_cormmerce/product_widgets/image_slider.dart';
-import 'package:green_circle/widgets/e_cormmerce/product_widgets/product_info.dart';
-import 'package:green_circle/widgets/e_cormmerce/product_widgets/add_cart.dart';
-import 'package:green_circle/widgets/e_cormmerce/product_widgets/appbar.dart';
+import 'package:green_circle/widgets/e_commerce/product_widgets/coupon_card.dart';
+import 'package:green_circle/widgets/e_commerce/product_widgets/image_slider.dart';
+import 'package:green_circle/widgets/e_commerce/product_widgets/product_info.dart';
+import 'package:green_circle/widgets/e_commerce/product_widgets/add_cart.dart';
+import 'package:green_circle/widgets/e_commerce/product_widgets/appbar.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -34,9 +34,7 @@ class _ProductScreenState extends State<ProductScreen>{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ProductAppBar(cart:currentNumber,),
-              Hero(
-                tag: "${widget.product.title} sale",
-                child: ImageSlider(
+              ImageSlider(
                   onChange: (index) {
                     setState(() {
                       currentImageIndex = index;
@@ -45,12 +43,11 @@ class _ProductScreenState extends State<ProductScreen>{
                   currentImage: currentImageIndex,
                   image: widget.product.image,
                 ),
-              ),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
-                  5,
+                  widget.product.image.length,
                       (index) => AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
                     width: currentImageIndex == index ? 15 : 8,
@@ -94,7 +91,7 @@ class _ProductScreenState extends State<ProductScreen>{
                   radius:30,
                 ),
                 title:Text(widget.product.category.title,style:title2Black,),
-                subtitle:const Text("In Ha Noi",style:TextStyle(fontSize:12,color:Colors.grey),),
+                subtitle:Text(widget.product.category.location??"In Ha Noi",style:const TextStyle(fontSize:12,color:Colors.grey),),
                 trailing:TextButton(
                   child:const Text("Explore shop",style:TextStyle(color:green1),),
                   onPressed:(){},

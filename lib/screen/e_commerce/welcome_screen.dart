@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:green_circle/screen/e_cormmerce/wrapper.dart';
+import 'package:green_circle/screen/e_commerce/wrapper.dart';
 import 'package:animate_do/animate_do.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -30,7 +30,7 @@ class WelcomePage extends StatelessWidget {
                 children:[
                   Positioned(
                     top: 100,
-                    left: 70,
+                    left: 60,
                     child: FadeInDownBig(
                       delay: const Duration(milliseconds: 200),
                       duration: const Duration(milliseconds: 1500),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:green_circle/models/user.dart';
 import 'login_screen.dart';
 import 'package:green_circle/services/auth_services.dart';
 import 'package:green_circle/services/database.dart';
@@ -99,7 +100,7 @@ class MySignupState extends State<SignUp>{
                               }
                               else{
                                 // // create a profile base on unique uid
-                                await Database(uid:result.uid).updateData(fullName,null);
+                                await Database(uid:result.uid).updateUserData(UserInformation(name: fullName??"", voucherId:[],cartItems:[],boughtProduct:[],likedProduct:[],soldProduct:[]));
                                 final snackBar = SnackBar(
                                   backgroundColor:green1,
                                   content: Text('Sign up successfully',style:snackBarFonts,),
@@ -292,7 +293,7 @@ class MySignupState extends State<SignUp>{
       labelStyle:GoogleFonts.outfit(fontSize:15,color:Colors.black,fontWeight:FontWeight.w500),
       suffix: InkWell(
           child:hint?const Icon(Icons.remove_red_eye_outlined):const Icon(Icons.visibility_off_sharp),
-          onTap:()async{
+          onTap:(){
             setState(() {
               hint=!hint;
             });

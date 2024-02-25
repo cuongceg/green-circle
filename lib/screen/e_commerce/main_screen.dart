@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
-import 'package:green_circle/screen/e_cormmerce/cart.dart';
-import 'package:green_circle/screen/e_cormmerce/profile_screen.dart';
-import 'package:green_circle/widgets/e_cormmerce/nav_bar.dart';
+import 'package:green_circle/screen/e_commerce/scan_screen.dart';
+import 'like_product_screen.dart';
+import 'package:green_circle/screen/e_commerce/profile_screen.dart';
+import 'package:green_circle/widgets/e_commerce/nav_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,9 +17,9 @@ class _MainScreenState extends State<MainScreen> {
   List screens = const [
     NavBar(),
     Scaffold(),
-    Scaffold(),
-    CartScreen(),
-    ProfileScreen(),
+    ScanScreen(),
+    LikeProductScreen(),
+    MeScreen(),
   ];
 
   @override
