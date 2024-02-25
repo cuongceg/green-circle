@@ -293,7 +293,7 @@ class MySignupState extends State<SignUp>{
       labelStyle:GoogleFonts.outfit(fontSize:15,color:Colors.black,fontWeight:FontWeight.w500),
       suffix: InkWell(
           child:hint?const Icon(Icons.remove_red_eye_outlined):const Icon(Icons.visibility_off_sharp),
-          onTap:()async{
+          onTap:(){
             setState(() {
               hint=!hint;
             });
