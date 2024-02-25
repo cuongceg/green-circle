@@ -78,7 +78,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
           ListTile(
             title:Text("Speed",style:body1Black,),
             subtitle:Text("Receive products on the day 27/2-28/2",style:body1Black,),
-            trailing: Text("\$15",style:title3Black,),
+            trailing: Text("30 000",style:title3Black,),
           ),
           const Divider(),
           Padding(
@@ -121,7 +121,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Order",style:subTitleFonts,),
-                Text('\$${widget.product.price}',style: title3Black,),
+                Text('${widget.product.price.toStringAsFixed(0)} 000',style: title3Black,),
               ],
             ),
           ),
@@ -131,7 +131,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Delivery",style:subTitleFonts,),
-                Text("\$15",style:title3Black,),
+                Text("30 000",style:title3Black,),
               ],
             ),
           ),
@@ -141,7 +141,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Total",style:subTitleFonts,),
-                Text(discount?'\$${((widget.product.price+15)*widget.quantity*0.8).toStringAsFixed(2)}':'\$${(widget.product.price+15)*widget.quantity}',style:title3Black,),
+                Text(discount?'${((widget.product.price+30)*widget.quantity*0.8).toStringAsFixed(0)} 000':'${(widget.product.price+30).toStringAsFixed(0)*widget.quantity} 000',style:title3Black,),
               ],
             ),
           ),

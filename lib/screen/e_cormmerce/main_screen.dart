@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
-import 'package:green_circle/screen/e_cormmerce/add_product.dart';
 import 'package:green_circle/screen/e_cormmerce/like_product_screen.dart';
 import 'package:green_circle/screen/e_cormmerce/profile_screen.dart';
+import 'package:green_circle/screen/e_cormmerce/scan_screen.dart';
 import 'package:green_circle/widgets/e_cormmerce/nav_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   List screens = const [
     NavBar(),
     Scaffold(),
-    AddProduct(),
+    ScanScreen(),
     LikeProductScreen(),
     ProfileScreen(),
   ];

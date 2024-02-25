@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/models/category.dart';
 import 'package:green_circle/models/production.dart';
+import 'package:green_circle/screen/e_cormmerce/main_screen.dart';
 import 'package:green_circle/services/database.dart';
 import 'dart:math';
 import 'dart:io';
@@ -216,6 +217,7 @@ class _AddProductState extends State<AddProduct> {
                         imagesUrl.removeRange(0,imagesUrl.length);
                       });
                     }
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => const MainScreen()));
                   },
                   child:Text(
                     "Save",
