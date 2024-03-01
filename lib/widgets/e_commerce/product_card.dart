@@ -40,6 +40,7 @@ class ProductCard extends StatelessWidget {
                 padding: const EdgeInsets.only(left:10,top: 0),
                 child: Text(product.title,style:body1Black,),
               ),
+              const SizedBox(height:5,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -47,10 +48,10 @@ class ProductCard extends StatelessWidget {
                     padding:const EdgeInsets.only(left:10.0),
                     child: Text("${product.price.toStringAsFixed(0)} 000",style:body1Black,),
                   ),
-                  TextButton.icon(
-                      onPressed:(){},
-                      icon: const Icon(Icons.favorite,color:mediumGray,),
-                      label: Text("${product.likedNumber}",style:body1Black,)),
+                  Padding(
+                    padding: const EdgeInsets.only(right:10.0),
+                    child: Text("Sold ${product.purchasesNumber}",style:body1Black,),
+                  ),
                 ],
               ),
             ],
@@ -95,10 +96,10 @@ class ProductCard extends StatelessWidget {
                           style: body1Black
                       ),
                     ),
-                    TextButton.icon(
-                        onPressed:(){},
-                        icon: const Icon(Icons.favorite,color:mediumGray,),
-                        label: Text("${product.likedNumber}",style:body1Black,)),
+                    Padding(
+                      padding: const EdgeInsets.only(right:10.0),
+                      child: Text("Sold ${product.purchasesNumber}",style:body1Black,),
+                    ),
                   ],
                 ),
               )
