@@ -71,8 +71,18 @@ class _ScreenOptionsState extends State<ScreenOptions> {
                     ),
                     item("assets/images/ecommerce_image.png",
                       TextButton(
-                          onPressed:(){
-                            Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const MainScreen()));
+                          onPressed:()async{
+                            var status = await Permission.manageExternalStorage.request();
+                            if (status == PermissionStatus.granted) {
+                              Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const MainScreen()));
+                            }
+                            else{
+                              final snackBar = SnackBar(
+                                backgroundColor:red,
+                                content: Text('No storage permission',style:snackBarFonts,),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
                           },
                           child: Text("Ecommerce platforms",style: textStyle,)
                       ),
