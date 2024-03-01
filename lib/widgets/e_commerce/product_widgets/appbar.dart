@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:badges/badges.dart'as badges;
+import 'package:green_circle/services/database.dart';
 import 'package:green_circle/services/share_link.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ProductAppBar extends StatefulWidget {
-  final int cart;
-  const ProductAppBar({super.key,required this.cart});
+  int cart;
+  ProductAppBar({super.key,required this.cart});
   @override
   State<ProductAppBar> createState() => _ProductAppBarState();
 }
@@ -68,7 +69,7 @@ class _ProductAppBarState extends State<ProductAppBar>with SingleTickerProviderS
           IconButton(
             onPressed: ()async{
               Uri link=await DynamicLinkService.instance.createDynamicLink();
-              Share.share("Shopping product:$link");
+              Share.share("Shopping product:$link/id_product=1/");
             },
             style: IconButton.styleFrom(
               backgroundColor: Colors.white,
@@ -88,6 +89,14 @@ class _ProductAppBarState extends State<ProductAppBar>with SingleTickerProviderS
                   ),
                   onPressed: () {
                     isFav ? _controller.reverse() : _controller.forward();
+                    if(isFav){
+                      widget.cart++;
+                      Database().productionCollection.doc().update({"likedNumber":widget.cart});
+                    }
+                    else{
+                      widget.cart--;
+                      Database().productionCollection.doc().update({"likedNumber":widget.cart});
+                    }
                   },
                 );
               }

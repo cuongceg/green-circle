@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 10),
                       SizedBox(
-                        height:195,
+                        height:175,
                         width: 500,
                         child: ListView.builder(
                             physics: const AlwaysScrollableScrollPhysics(),
