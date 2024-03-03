@@ -142,8 +142,8 @@ class _ProductScreenState extends State<ProductScreen>with SingleTickerProviderS
                       badgeStyle: const badges.BadgeStyle(
                         badgeColor: green1,
                       ),
-                      badgeContent: Text(
-                        currentNumber.toString(),
+                      badgeContent:const Text(
+                        "5",
                         style: const TextStyle(color: Colors.white),
                       ),
                       child: IconButton(
