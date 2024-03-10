@@ -10,6 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 
 void main() async{
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -32,6 +34,12 @@ void main() async{
       appleProvider: AppleProvider.debug,
     );
   }
+  await Hive.initFlutter();
+  Hive.registerAdapter(FavorProductsAdapter());
+  await Hive.openBox<FavorProducts>('favourite_products');
+  Hive.registerAdapter(CartItemsAdapter());
+  await Hive.openBox<CartItems>('cart_items');
+  Gemini.init(apiKey: 'AIzaSyDWGA9TBHvGe1HMIKoGu_uhVj5qW4Se2LY');
   runApp(const MyApp());
 }
 

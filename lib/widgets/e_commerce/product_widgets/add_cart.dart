@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/models/production.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:green_circle/screen/e_commerce/check_out_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 
 class AddToCart extends StatefulWidget {
   final Product product;
@@ -13,7 +14,7 @@ class AddToCart extends StatefulWidget {
 }
 
 class _AddToCartState extends State<AddToCart> {
-  int quantity=1;
+  var box = Hive.box<CartItems>('cart_items');
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -59,7 +60,7 @@ class _AddToCartState extends State<AddToCart> {
                                             Image.network(widget.product.image[0],height:150,width:150,),
                                             Expanded(
                                                 child:ListTile(
-                                                  title:Text("\$${widget.product.price}",style:title2,),
+                                                  title:Text("${widget.product.price.toStringAsFixed(0)} 000",style:title2,),
                                                   subtitle:Text("Remain:${widget.product.remain}",style:body1Black,),
                                                 ))
                                           ],
@@ -114,6 +115,14 @@ class _AddToCartState extends State<AddToCart> {
                                                 child: TextButton(
                                                   child: Text("Add cart",style:GoogleFonts.almarai(color:Colors.white,fontSize:20),),
                                                   onPressed:(){
+                                                    CartItems cartItems=CartItems(
+                                                        productId: widget.product.productId,
+                                                        price: widget.product.price,
+                                                        imageUrl: widget.product.image[0],
+                                                        title: widget.product.title,
+                                                        quantity: currentNumber);
+                                                    box.add(cartItems);
+                                                    debugPrint(box.length.toString());
                                                     Navigator.pop(context);
                                                   },
                                                 )),
@@ -142,6 +151,7 @@ class _AddToCartState extends State<AddToCart> {
                           return BottomSheet(
                               onClosing: (){},
                               builder:(BuildContext context){
+                                int quantity = 1;
                                 return StatefulBuilder(
                                     builder:(BuildContext context,setState){
                                       return Container(
