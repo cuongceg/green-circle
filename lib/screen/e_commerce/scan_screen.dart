@@ -16,8 +16,8 @@ class ScanScreen extends StatefulWidget {
 class _ScanScreenState extends State<ScanScreen> {
   File? _selectedImage;
   bool hasResult=false,onPressed=false;
-  List<String>result=["Not recycled","Not recycled","Not recycled","Recycled"];
-  List<String>composition=['Plastic','Battery','Plastic',"Cloth"];
+  List<String>result=["Not recycled","Not recycled","Recycled"];
+  List<String>composition=['Plastic','Battery',"Coconut nutshell"];
   int index=-1;
   @override
   Widget build(BuildContext context) {
@@ -119,13 +119,13 @@ class _ScanScreenState extends State<ScanScreen> {
             children:[
               Padding(
                 padding: const EdgeInsets.symmetric(vertical:10,horizontal:10),
-                child:Text("- ${result[index]} products",style: index==3?labelGreen:label,),
+                child:Text("- ${result[index]} products",style: index==2?labelGreen:label,),
               ),
               Padding(
                 padding: const EdgeInsets.only(top:10,left:10,bottom:5),
                 child: Text("- Product materials: ${composition[index]}",style: label,),
               ),
-              index==3?Center(
+              index==2?Center(
                 child: Container(
                   height:40,
                   width: 285,

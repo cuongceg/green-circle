@@ -1,14 +1,16 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:green_circle/models/user.dart';
+import 'package:green_circle/screen/e_commerce/wrapper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:green_circle/constants.dart';
-import 'package:green_circle/models/production.dart';
-import 'package:green_circle/widgets/e_commerce/product_card.dart';
+// import 'package:green_circle/models/production.dart';
+// import 'package:green_circle/widgets/e_commerce/product_card.dart';
 import 'package:green_circle/services/auth_services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class MeScreen extends StatefulWidget {
   const MeScreen({Key? key}) : super(key: key);
@@ -30,7 +32,7 @@ class _MeScreenState extends State<MeScreen> {
   }
 
   Future<void> _getCurrentUser() async {
-    User? user = FirebaseAuth.instance.currentUser;
+    MyUser? user =Provider.of<MyUser?>(context);
     if (user != null) {
       setState(() {
         userId = user.uid;
@@ -442,19 +444,19 @@ class _MeScreenState extends State<MeScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                SizedBox(
-                  height: 180,
-                  width: 500,
-                  child: ListView.builder(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemCount: products.length,
-                      itemBuilder: (context, index) {
-                        return ProductCard(
-                            product: products[index], isHorizontal: true);
-                      }),
-                ),
+                // SizedBox(
+                //   height: 180,
+                //   width: 500,
+                //   child: ListView.builder(
+                //       physics: const AlwaysScrollableScrollPhysics(),
+                //       scrollDirection: Axis.horizontal,
+                //       shrinkWrap: true,
+                //       itemCount: products.length,
+                //       itemBuilder: (context, index) {
+                //         return ProductCard(
+                //             product: products[index], isHorizontal: true);
+                //       }),
+                // ),
                 const SizedBox(height: 20),
                 Center(
                   child: TextButton.icon(
@@ -475,8 +477,9 @@ class _MeScreenState extends State<MeScreen> {
                           fontWeight: FontWeight.w700,
                           color: Colors.white),
                     ),
-                    onPressed: () {
+                    onPressed: (){
                       AuthService().signOut();
+                      Navigator.push(context,MaterialPageRoute(builder: (context)=>const Wrapper()));
                     },
                   ),
                 ),

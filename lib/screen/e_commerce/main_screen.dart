@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
+import 'package:green_circle/screen/e_commerce/chat_screen.dart';
 import 'package:green_circle/screen/e_commerce/scan_screen.dart';
 import 'like_product_screen.dart';
 import 'package:green_circle/screen/e_commerce/profile_screen.dart';
@@ -16,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   int currentTab = 0;
   List screens = const [
     NavBar(),
-    Scaffold(),
+    ChatScreen(),
     ScanScreen(),
     LikeProductScreen(),
     MeScreen(),
