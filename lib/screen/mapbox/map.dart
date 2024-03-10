@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green_circle/constants.dart';
 import 'package:flutter/gestures.dart';
@@ -97,8 +98,7 @@ class _FullMapState extends State<FullMap> {
   @override
   void initState() {
     super.initState();
-    accessToken =
-    "sk.eyJ1IjoidGh1Y2t1YmluIiwiYSI6ImNsc29mbDIwajBjdnQybHA5aDY3N3cwejcifQ.uWPAB2GAOwDfBujnEzCt8A";
+    accessToken =dotenv.env['MAPBOX_TOKEN']??"";
     tokenkey();
     createUserGuide();
     Future.delayed(Duration.zero, showUserGuide);

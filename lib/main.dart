@@ -12,6 +12,7 @@ import 'firebase_options.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async{
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -39,7 +40,10 @@ void main() async{
   await Hive.openBox<FavorProducts>('favourite_products');
   Hive.registerAdapter(CartItemsAdapter());
   await Hive.openBox<CartItems>('cart_items');
-  Gemini.init(apiKey: 'AIzaSyDWGA9TBHvGe1HMIKoGu_uhVj5qW4Se2LY');
+  await dotenv.load(fileName: ".env");
+  if(dotenv.env['GEMINI_TOKEN']!=null){
+    Gemini.init(apiKey: dotenv.env['GEMINI_TOKEN']??"");
+  }
   runApp(const MyApp());
 }
 
