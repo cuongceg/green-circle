@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
+import 'package:green_circle/screen/e_commerce/add_product.dart';
 import 'package:green_circle/screen/e_commerce/chat_screen.dart';
-import 'package:green_circle/screen/e_commerce/scan_screen.dart';
 import 'like_product_screen.dart';
 import 'package:green_circle/screen/e_commerce/profile_screen.dart';
 import 'package:green_circle/widgets/e_commerce/nav_bar.dart';
@@ -18,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
   List screens = const [
     NavBar(),
     ChatScreen(),
-    ScanScreen(),
+    AddProduct(),
     LikeProductScreen(),
     MeScreen(),
   ];
@@ -51,11 +51,11 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             labelIcon(Icons.home_outlined,0,"Home"),
             Padding(
-              padding: const EdgeInsets.only(left:0,right:40),
+              padding: currentTab==2?const EdgeInsets.only(left:15,right:50):const EdgeInsets.only(left:0,right:40),
               child: labelIcon(Icons.support_agent,1,"Chat"),
             ),
             Padding(
-              padding: const EdgeInsets.only(left:29,right:0),
+              padding: currentTab==2?const EdgeInsets.only(left:29,right:10):const EdgeInsets.only(left:29,right:0),
               child: labelIcon(Icons.favorite_border_rounded,3,"Likes"),
             ),
             labelIcon(Icons.person,4,"Profile"),
