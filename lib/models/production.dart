@@ -108,7 +108,9 @@ class CartItems extends HiveObject{
   String title;
   @HiveField(4)
   int quantity;
-  CartItems({required this.productId,required this.price,required this.imageUrl,required this.title,required this.quantity});
+  @HiveField(5)
+  String category;
+  CartItems({required this.productId,required this.price,required this.imageUrl,required this.title,required this.quantity,required this.category});
 }
 
 class CartItemsAdapter extends TypeAdapter<CartItems> {
@@ -123,6 +125,7 @@ class CartItemsAdapter extends TypeAdapter<CartItems> {
       imageUrl: reader.readString(),
       title: reader.readString(),
       quantity: reader.readInt(),
+      category: reader.readString(),
     );
   }
 
@@ -133,5 +136,6 @@ class CartItemsAdapter extends TypeAdapter<CartItems> {
     writer.writeString(obj.imageUrl);
     writer.writeString(obj.title);
     writer.writeInt(obj.quantity);
+    writer.writeString(obj.category);
   }
 }
