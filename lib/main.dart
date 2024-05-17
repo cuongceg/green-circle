@@ -40,7 +40,7 @@ void main() async{
   await Hive.openBox<FavorProducts>('favourite_products');
   Hive.registerAdapter(CartItemsAdapter());
   await Hive.openBox<CartItems>('cart_items');
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: "assets/.env");
   if(dotenv.env['GEMINI_TOKEN']!=null){
     Gemini.init(apiKey: dotenv.env['GEMINI_TOKEN']??"");
   }
