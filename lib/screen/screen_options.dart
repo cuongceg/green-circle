@@ -252,11 +252,11 @@ class _ScreenOptionsState extends State<ScreenOptions> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal:20),
-                child: labelIcon(Icons.notifications,3,"Notifications"),
+                child: labelIcon(Icons.notifications,2,"Notifications"),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal:20),
-                child: labelIcon(Icons.person,4,"Profile"),
+                child: labelIcon(Icons.person,3,"Profile"),
               ),
             ],
           ),
