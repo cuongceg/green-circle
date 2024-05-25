@@ -277,18 +277,29 @@ class _MeScreenState extends State<MeScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const SizedBox(height: 20,),
+                          const SizedBox(
+                            height: 20,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(left: 42),
-                                child: Icon(Icons.favorite_border_rounded, color: Colors.green,),
+                                child: Icon(
+                                  Icons.favorite_border_rounded,
+                                  color: Colors.green,
+                                ),
                               ),
-                              Icon(Icons.share, color: Colors.green,),
+                              Icon(
+                                Icons.share,
+                                color: Colors.green,
+                              ),
                               Padding(
                                 padding: EdgeInsets.only(right: 43),
-                                child: Icon(Icons.star_border_outlined, color: Colors.green,),
+                                child: Icon(
+                                  Icons.star_border_outlined,
+                                  color: Colors.green,
+                                ),
                               ),
                             ],
                           ),
@@ -297,17 +308,30 @@ class _MeScreenState extends State<MeScreen> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 30),
-                                child: Text('500 likes', style: TextStyle(color: Colors.green, fontSize: 16),),
+                                child: Text(
+                                  '500 likes',
+                                  style: TextStyle(
+                                      color: Colors.green, fontSize: 16),
+                                ),
                               ),
-                              Text('10 shares', style: TextStyle(color: Colors.green, fontSize: 16),),
+                              Text(
+                                '10 shares',
+                                style: TextStyle(
+                                    color: Colors.green, fontSize: 16),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.only(right: 30),
-                                child: Text('30 stars', style: TextStyle(color: Colors.green, fontSize: 16),),
+                                child: Text(
+                                  '30 stars',
+                                  style: TextStyle(
+                                      color: Colors.green, fontSize: 16),
+                                ),
                               ),
                             ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 20),
                             child: Container(
                               height: 50,
                               width: double.infinity,
@@ -321,34 +345,51 @@ class _MeScreenState extends State<MeScreen> {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        backgroundColor: Color.fromARGB(255, 244, 255, 243),
+                                        backgroundColor:
+                                            Color.fromARGB(255, 244, 255, 243),
                                         title: Center(
-                                                  child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.celebration, color: Colors.green), 
-            SizedBox(width: 8), 
-            Text(
-              '54 000',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.green),
-            ),
-            SizedBox(width: 8), 
-            Transform(
-  alignment: Alignment.center,
-  transform: Matrix4.rotationY(180 * 3.1415927 / 180),
-  child: Icon(Icons.celebration_outlined, color: Colors.green,), 
-),
-
-          ],
-        ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Icon(Icons.celebration,
+                                                  color: Colors.green),
+                                              SizedBox(width: 8),
+                                              Text(
+                                                '54 000',
+                                                style: TextStyle(
+                                                    fontSize: 24,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.green),
+                                              ),
+                                              SizedBox(width: 8),
+                                              Transform(
+                                                alignment: Alignment.center,
+                                                transform: Matrix4.rotationY(
+                                                    180 * 3.1415927 / 180),
+                                                child: Icon(
+                                                  Icons.celebration_outlined,
+                                                  color: Colors.green,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                        content: Text('is the amount you donate to the funds!', style: TextStyle(fontSize: 14), textAlign: TextAlign.center,),
+                                        content: Text(
+                                          'is the amount you donate to the funds!',
+                                          style: TextStyle(fontSize: 14),
+                                          textAlign: TextAlign.center,
+                                        ),
                                         actions: [
                                           TextButton(
                                             onPressed: () {
                                               Navigator.of(context).pop();
                                             },
-                                            child: const Text('Close', style: TextStyle(color: Colors.green),),
+                                            child: const Text(
+                                              'Close',
+                                              style: TextStyle(
+                                                  color: Colors.green),
+                                            ),
                                           ),
                                         ],
                                       );
@@ -357,7 +398,10 @@ class _MeScreenState extends State<MeScreen> {
                                 },
                                 child: Text(
                                   "Convert",
-                                  style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
+                                  style: GoogleFonts.almarai(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.white),
                                 ),
                               ),
                             ),
@@ -461,7 +505,8 @@ class _MeScreenState extends State<MeScreen> {
                     shrinkWrap: true,
                     itemCount: products.length,
                     itemBuilder: (context, index) {
-                      return ProductCard(product: products[index], isHorizontal: true);
+                      return ProductCard(
+                          product: products[index], isHorizontal: true);
                     },
                   ),
                 ),
