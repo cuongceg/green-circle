@@ -41,10 +41,10 @@ dependencies:
   google_fonts: ^6.1.0
   badges: ^3.1.2
   firebase_dynamic_links: ^5.4.13
-  share_plus: ^7.2.2
+  share_plus: ^9.0.0
   firebase_analytics: ^10.8.5
   coupon_uikit: ^0.2.1
-  readmore: ^2.2.0
+  readmore: ^3.0.0
   animate_do: ^3.3.3
   firebase_storage: ^11.6.5
   image_picker: ^1.0.7
@@ -61,7 +61,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   flutter_gemini: ^2.0.3
-  flutter_markdown: ^0.6.20
+  flutter_markdown: ^0.7.1
   flutter_dotenv: ^5.1.0
 
 dev_dependencies:
@@ -73,7 +73,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,16 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:green_circle/models/user.dart';
-import 'package:green_circle/screen/e_commerce/wrapper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:green_circle/constants.dart';
-// import 'package:green_circle/models/production.dart';
-// import 'package:green_circle/widgets/e_commerce/product_card.dart';
+import 'package:green_circle/models/production.dart';
+import 'package:green_circle/widgets/e_commerce/product_card.dart';
 import 'package:green_circle/services/auth_services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class MeScreen extends StatefulWidget {
   const MeScreen({Key? key}) : super(key: key);
@@ -32,7 +30,7 @@ class _MeScreenState extends State<MeScreen> {
   }
 
   Future<void> _getCurrentUser() async {
-    MyUser? user =Provider.of<MyUser?>(context);
+    User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       setState(() {
         userId = user.uid;
@@ -55,7 +53,7 @@ class _MeScreenState extends State<MeScreen> {
         });
       }
     } catch (e) {
-      debugPrint("Error loading user data: $e");
+      print("Error loading user data: $e");
     }
   }
 
@@ -95,13 +93,12 @@ class _MeScreenState extends State<MeScreen> {
           .doc(userId)
           .set({'image_url': imageUrl}, SetOptions(merge: true));
     } catch (e) {
-      debugPrint("Error saving image URL to Firestore: $e");
+      print("Error saving image URL to Firestore: $e");
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // Check if user ID is available before building the UI
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -111,7 +108,7 @@ class _MeScreenState extends State<MeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 10),
+                SizedBox(height: 10),
                 Row(
                   children: [
                     GestureDetector(
@@ -124,16 +121,16 @@ class _MeScreenState extends State<MeScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   ListTile(
-                                    leading: const Icon(Icons.camera),
-                                    title: const Text('Take a photo'),
+                                    leading: Icon(Icons.camera),
+                                    title: Text('Take a photo'),
                                     onTap: () {
                                       _getImage(ImageSource.camera);
                                       Navigator.pop(context);
                                     },
                                   ),
                                   ListTile(
-                                    leading: const Icon(Icons.photo),
-                                    title: const Text('Choose from gallery'),
+                                    leading: Icon(Icons.photo),
+                                    title: Text('Choose from gallery'),
                                     onTap: () {
                                       _getImage(ImageSource.gallery);
                                       Navigator.pop(context);
@@ -161,7 +158,7 @@ class _MeScreenState extends State<MeScreen> {
                                   fit: BoxFit.cover,
                                 ),
                               )
-                            : const Center(
+                            : Center(
                                 child: Icon(
                                   Icons.person,
                                   size: 50,
@@ -170,14 +167,14 @@ class _MeScreenState extends State<MeScreen> {
                               ),
                       ),
                     ),
-                    const SizedBox(width: 20),
+                    SizedBox(width: 20),
                     Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: green1,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: const Text(
+                      child: Text(
                         "My Activity",
                         style: TextStyle(
                           fontSize: 16,
@@ -186,10 +183,10 @@ class _MeScreenState extends State<MeScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 90),
+                    SizedBox(width: 90),
                     Container(
-                      margin: const EdgeInsets.all(10),
-                      padding: const EdgeInsets.all(5),
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
@@ -199,7 +196,7 @@ class _MeScreenState extends State<MeScreen> {
                       ),
                       child: IconButton(
                         onPressed: () {},
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.menu,
                           size: 30,
                           color: green1,
@@ -208,32 +205,32 @@ class _MeScreenState extends State<MeScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 Text(
                   "Hello, $userName!!",
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       width: 100,
                       height: 100,
-                      margin: const EdgeInsets.only(right: 20),
+                      margin: EdgeInsets.only(right: 20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
+                        image: DecorationImage(
                           image: AssetImage('assets/images/iconme1.png'),
                           fit: BoxFit.cover,
                         ),
                       ),
                     ),
-                    const Flexible(
+                    Flexible(
                       flex: 1,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -259,108 +256,119 @@ class _MeScreenState extends State<MeScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
-                const Text(
-                  "My Wallet",
-                  style: TextStyle(
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                SizedBox(height: 20),
+// Convert
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const SizedBox(height: 20,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 42),
+                                child: Icon(Icons.favorite_border_rounded, color: Colors.green,),
+                              ),
+                              Icon(Icons.share, color: Colors.green,),
+                              Padding(
+                                padding: EdgeInsets.only(right: 43),
+                                child: Icon(Icons.star_border_outlined, color: Colors.green,),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 30),
+                                child: Text('500 likes', style: TextStyle(color: Colors.green, fontSize: 16),),
+                              ),
+                              Text('10 shares', style: TextStyle(color: Colors.green, fontSize: 16),),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 30),
+                                child: Text('30 stars', style: TextStyle(color: Colors.green, fontSize: 16),),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                            child: Container(
+                              height: 50,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: TextButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        backgroundColor: Color.fromARGB(255, 244, 255, 243),
+                                        title: Center(
+                                                  child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.celebration, color: Colors.green), 
+            SizedBox(width: 8), 
+            Text(
+              '54 000',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.green),
+            ),
+            SizedBox(width: 8), 
+            Transform(
+  alignment: Alignment.center,
+  transform: Matrix4.rotationY(180 * 3.1415927 / 180),
+  child: Icon(Icons.celebration_outlined, color: Colors.green,), 
+),
+
+          ],
+        ),
+                                        ),
+                                        content: Text('is the amount you donate to the funds!', style: TextStyle(fontSize: 14), textAlign: TextAlign.center,),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text('Close', style: TextStyle(color: Colors.green),),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Text(
+                                  "Convert",
+                                  style: GoogleFonts.almarai(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        width: 70,
-                        height: 70,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/images/momo.png',
-                              width: 40,
-                              height: 40,
-                            ),
-                            const Text(
-                              "MOMO",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        width: 70,
-                        height: 70,
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.white),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/images/vnpay.png',
-                              width: 40,
-                              height: 40,
-                            ),
-                            const Text(
-                              "VNPAY",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        width: 70,
-                        height: 70,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/images/zalopay.png',
-                              width: 40,
-                              height: 40,
-                            ),
-                            const Text(
-                              "ZALOPAY",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                const Text(
+                SizedBox(height: 20),
+                Text(
                   "My Purchases",
                   style: TextStyle(
                     fontSize: 21,
@@ -368,17 +376,17 @@ class _MeScreenState extends State<MeScreen> {
                     color: Colors.black,
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: green5,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: const Text(
+                      child: Text(
                         "To Pay",
                         style: TextStyle(
                           fontSize: 16,
@@ -388,12 +396,12 @@ class _MeScreenState extends State<MeScreen> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: green5,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: const Text(
+                      child: Text(
                         "To Ship",
                         style: TextStyle(
                           fontSize: 16,
@@ -403,12 +411,12 @@ class _MeScreenState extends State<MeScreen> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: green5,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: const Text(
+                      child: Text(
                         "To Receive",
                         style: TextStyle(
                           fontSize: 16,
@@ -418,12 +426,12 @@ class _MeScreenState extends State<MeScreen> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: green5,
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      child: const Text(
+                      child: Text(
                         "To Rate",
                         style: TextStyle(
                           fontSize: 16,
@@ -434,8 +442,8 @@ class _MeScreenState extends State<MeScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
-                const Text(
+                SizedBox(height: 20),
+                Text(
                   "Buy Again",
                   style: TextStyle(
                     fontSize: 21,
@@ -444,27 +452,26 @@ class _MeScreenState extends State<MeScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                // SizedBox(
-                //   height: 180,
-                //   width: 500,
-                //   child: ListView.builder(
-                //       physics: const AlwaysScrollableScrollPhysics(),
-                //       scrollDirection: Axis.horizontal,
-                //       shrinkWrap: true,
-                //       itemCount: products.length,
-                //       itemBuilder: (context, index) {
-                //         return ProductCard(
-                //             product: products[index], isHorizontal: true);
-                //       }),
-                // ),
+                SizedBox(
+                  height: 180,
+                  width: 500,
+                  child: ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      return ProductCard(product: products[index], isHorizontal: true);
+                    },
+                  ),
+                ),
                 const SizedBox(height: 20),
                 Center(
                   child: TextButton.icon(
                     style: const ButtonStyle(
-                        backgroundColor:
-                            MaterialStatePropertyAll<Color>(green1),
-                        fixedSize:
-                            MaterialStatePropertyAll<Size>(Size(285, 55))),
+                      backgroundColor: MaterialStatePropertyAll<Color>(green1),
+                      fixedSize: MaterialStatePropertyAll<Size>(Size(285, 55)),
+                    ),
                     icon: const Icon(
                       Icons.logout,
                       color: Colors.white,
@@ -473,13 +480,13 @@ class _MeScreenState extends State<MeScreen> {
                     label: Text(
                       "Sign out",
                       style: GoogleFonts.almarai(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
                     ),
-                    onPressed: (){
+                    onPressed: () {
                       AuthService().signOut();
-                      Navigator.push(context,MaterialPageRoute(builder: (context)=>const Wrapper()));
                     },
                   ),
                 ),
