@@ -29,14 +29,14 @@ class WelcomePage extends StatelessWidget {
               child: Stack(
                 children:[
                   Positioned(
-                    top: 100,
-                    left: 60,
+                    top: 120,
+                    left: 80,
                     child: FadeInDownBig(
                       delay: const Duration(milliseconds: 200),
                       duration: const Duration(milliseconds: 1500),
                       child: SizedBox(
-                        width: widthR /1.5,
-                        height: heightR /1.5,
+                        width: widthR /1.6,
+                        height: heightR /1.6,
                         child: Center(
                           child:Image.asset("assets/images/logo.png",),),
                       ),
