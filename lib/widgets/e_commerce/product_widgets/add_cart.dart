@@ -120,6 +120,7 @@ class _AddToCartState extends State<AddToCart> {
                                                         price: widget.product.price,
                                                         imageUrl: widget.product.image[0],
                                                         title: widget.product.title,
+                                                        category: widget.product.category.title,
                                                         quantity: currentNumber);
                                                     box.add(cartItems);
                                                     debugPrint(box.length.toString());
