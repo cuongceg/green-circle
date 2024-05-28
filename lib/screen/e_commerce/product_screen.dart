@@ -26,6 +26,7 @@ class _ProductScreenState extends State<ProductScreen>with SingleTickerProviderS
   int currentImageIndex = 0;
   bool isFav = false;
   var box =Hive.box<FavorProducts>('favourite_products');
+  var cart = Hive.box<CartItems>('cart_items');
   late AnimationController _controller;
   late Animation<Color?> _colorAnimation;
 
@@ -58,10 +59,12 @@ class _ProductScreenState extends State<ProductScreen>with SingleTickerProviderS
   void dispose() {
     super.dispose();
     _controller.dispose();
+    debugPrint("dispose controller");
   }
   @override
   Widget build(BuildContext context) {
     int currentNumber = widget.product.likedNumber;
+    int cartItems = cart.length;
     FavorProducts favorProducts=FavorProducts(
         productId: widget.product.productId,
         price: widget.product.price,
@@ -142,12 +145,12 @@ class _ProductScreenState extends State<ProductScreen>with SingleTickerProviderS
                       badgeStyle: const badges.BadgeStyle(
                         badgeColor: green1,
                       ),
-                      badgeContent:const Text(
-                        "5",
+                      badgeContent:Text(
+                        "$cartItems",
                         style: const TextStyle(color: Colors.white),
                       ),
                       child: IconButton(
-                          icon: const Icon(Icons.shopping_cart),
+                          icon: const Icon(Icons.shopping_cart_outlined),
                           onPressed: () {
                             Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>const CartScreen()));
                           }),
