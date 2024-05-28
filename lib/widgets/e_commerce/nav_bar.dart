@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:green_circle/constants.dart';
 import 'package:green_circle/screen/e_commerce/home.dart';
-import 'package:badges/badges.dart' as badges;
 import 'package:green_circle/screen/e_commerce/search_screen.dart';
-import 'package:green_circle/screen/screen_options.dart';
+import 'package:green_circle/models/production.dart';
+import 'package:badges/badges.dart' as badges;
+import 'package:hive/hive.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -13,6 +15,7 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
+  var box = Hive.box<CartItems>('cart_items');
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +25,46 @@ class _NavBarState extends State<NavBar> {
           appBar: AppBar(
             backgroundColor: Colors.white,
             forceMaterialTransparency:true,
-            leading:IconButton(
-              icon: const Icon(Icons.arrow_back,size: 30,),
-              onPressed:(){
-                Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const ScreenOptions()));
+            title: GestureDetector(
+              onTap: (){
+                Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const SearchScreen()));
               },
+              child: Container(
+                height: 40,
+                width: 500,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.black87),
+                ),
+                child:Row(
+                  children:[
+                    const SizedBox(width: 10,),
+                    const Icon(Icons.search,size:25,),
+                    const SizedBox(width: 15,),
+                    Text("Search something",style: GoogleFonts.almarai(fontSize:14,fontWeight:FontWeight.w400,color:Colors.grey),)
+                  ]
+                )
+              ),
             ),
             actions: [
-              IconButton(
-                icon: const Icon(Icons.search,size: 30,),
-                onPressed:(){
-                  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const SearchScreen()));
-                },
+              badges.Badge(
+                position: badges.BadgePosition.topEnd(top: 0, end: 2),
+                badgeAnimation: const badges.BadgeAnimation.slide(
+                  // disappearanceFadeAnimationDuration: Duration(milliseconds: 200),
+                  // curve: Curves.easeInCubic,
+                ),
+                showBadge: true,
+                badgeStyle: const badges.BadgeStyle(
+                  badgeColor: green1,
+                ),
+                badgeContent:Text(
+                  "${box.length}",
+                  style: const TextStyle(color: Colors.white),
+                ),
+                child: IconButton(
+                    icon: const Icon(Icons.shopping_cart_outlined,size:25,),
+                    onPressed: () {
+                    }),
               ),
               badges.Badge(
                 position: badges.BadgePosition.topEnd(top: 0, end: 2),
@@ -46,27 +77,14 @@ class _NavBarState extends State<NavBar> {
                   badgeColor: green1,
                 ),
                 badgeContent:const Text(
-                  "2",
+                  "0",
                   style: TextStyle(color: Colors.white),
                 ),
-                child: IconButton(icon: const Icon(Icons.notifications,size: 25,), onPressed: () {}),
-              ),
-              badges.Badge(
-                position: badges.BadgePosition.topEnd(top: 0, end: 2),
-                badgeAnimation: const badges.BadgeAnimation.slide(
-                  // disappearanceFadeAnimationDuration: Duration(milliseconds: 200),
-                  // curve: Curves.easeInCubic,
-                ),
-                showBadge: true,
-                badgeStyle: const badges.BadgeStyle(
-                  badgeColor: green1,
-                ),
-                badgeContent:const Text(
-                  "5",
-                  style: TextStyle(color: Colors.white),
-                ),
-                child: IconButton(icon: const Icon(Icons.shopping_cart,size:25,), onPressed: () {}),
+                child: IconButton(
+                    icon: Image.asset('assets/images/chat_icon.png',height:25,width: 25,),
+                    onPressed: () {}),
               )
+
             ],
             bottom: TabBar(
                 labelColor:Colors.white,
