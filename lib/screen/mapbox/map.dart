@@ -6,7 +6,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:ui';
 import 'package:green_circle/screen/mapbox/recycling_locations_details.dart';
-import 'package:green_circle/screen/screen_options.dart';
 import 'package:green_circle/services/database.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -143,16 +142,6 @@ class _FullMapState extends State<FullMap> {
                     myLocationEnabled: true,
                     myLocationTrackingMode: MyLocationTrackingMode.Tracking,
                   )),
-            ),
-            Positioned(
-                left: 10,
-                top: 50,
-                child:IconButton(
-                  icon:const Icon(Icons.arrow_back),
-                  onPressed:(){
-                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => const ScreenOptions()));
-                  },
-                )
             ),
             Positioned(
               right: 10,
