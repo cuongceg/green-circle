@@ -128,7 +128,6 @@ class _ProductScreenState extends State<ProductScreen>with SingleTickerProviderS
                                 currentNumber+=1;
                                 box.add(favorProducts);
                               }
-                              debugPrint("${box.length}");
                               Database().productionCollection.doc(widget.product.productId).update({"likedNumber":currentNumber});
                             },
                           );
@@ -138,8 +137,8 @@ class _ProductScreenState extends State<ProductScreen>with SingleTickerProviderS
                     badges.Badge(
                       position: badges.BadgePosition.topEnd(top: 0, end: 2),
                       badgeAnimation: const badges.BadgeAnimation.slide(
-                        // disappearanceFadeAnimationDuration: Duration(milliseconds: 200),
-                        // curve: Curves.easeInCubic,
+                        disappearanceFadeAnimationDuration: Duration(milliseconds: 200),
+                        curve: Curves.easeInCubic,
                       ),
                       showBadge: true,
                       badgeStyle: const badges.BadgeStyle(
