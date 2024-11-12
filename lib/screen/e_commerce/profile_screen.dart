@@ -418,7 +418,7 @@ class _MeScreenState extends State<MeScreen> {
                     ),
                     TextButton(
                         onPressed: () {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ShopInfoScreen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const ShopInfoScreen()));
                         },
                         child: const Text('Explore shop',style:TextStyle(fontSize:15,color: green1),)
                     )
