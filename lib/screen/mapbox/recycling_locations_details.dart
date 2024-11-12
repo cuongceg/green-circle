@@ -6,7 +6,7 @@ import 'package:mapbox_gl/mapbox_gl.dart';
 class RecyclingLocationDetail extends StatelessWidget {
   final String name;
   final MapboxMapController mapController;
-  List<Line>existingLine;
+  final List<Line>existingLine;
   RecyclingLocationDetail({super.key,required this.name,required this.mapController,required this.existingLine});
   @override
   Widget build(BuildContext context) {
