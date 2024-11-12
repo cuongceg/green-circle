@@ -9,6 +9,7 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body:Column(
         children: [
           const SizedBox(height:50,),
@@ -20,7 +21,7 @@ class ChatScreen extends StatelessWidget {
               itemCount: categories.length,
               itemBuilder:(context, index) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(vertical:15),
+                  padding: index == 0?const EdgeInsets.only(bottom: 15,top:0): const EdgeInsets.symmetric(vertical:15),
                   child: ListTile(
                     leading:CircleAvatar(
                       backgroundImage: AssetImage(categories[index].image),
