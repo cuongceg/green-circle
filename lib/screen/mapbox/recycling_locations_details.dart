@@ -49,7 +49,7 @@ class RecyclingLocationDetail extends StatelessWidget {
                     icon:const Icon(Icons.directions,color: Colors.white,),
                     label: const Text("Direction to this location",style:TextStyle(color: Colors.white),),
                     style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll<Color>(green1)
+                        backgroundColor: WidgetStatePropertyAll<Color>(green1)
                     ),
                   ),
                 ),

@@ -527,8 +527,8 @@ class _MeScreenState extends State<MeScreen> {
                 Center(
                   child: TextButton.icon(
                     style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll<Color>(green1),
-                      fixedSize: MaterialStatePropertyAll<Size>(Size(285, 55)),
+                      backgroundColor: WidgetStatePropertyAll<Color>(green1),
+                      fixedSize: WidgetStatePropertyAll<Size>(Size(285, 55)),
                     ),
                     icon: const Icon(
                       Icons.logout,
