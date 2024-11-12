@@ -32,8 +32,16 @@ class ShopInfoScreenState extends State<ShopInfoScreen> {
   Widget build(BuildContext context) {
     double width=MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Tạo cửa hàng',style: title2Black,),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black,),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: Colors.white,
+        title: Text('Create your own shop',style: title2Black,),
       ),
       body: Form(
         key: _formKey,
@@ -66,7 +74,7 @@ class ShopInfoScreenState extends State<ShopInfoScreen> {
                         activeStep == 0 ? green1 : Colors.grey.shade400,
                       ),
                     ),
-                    title: 'Thông tin cơ bản',
+                    title: 'Basic Information',
                   ),
                   EasyStep(
                     customStep: CircleAvatar(
@@ -78,7 +86,7 @@ class ShopInfoScreenState extends State<ShopInfoScreen> {
                         activeStep == 1 ? green1 : Colors.grey.shade400,
                       ),
                     ),
-                    title: 'Thông tin vận chuyển',
+                    title: 'Transportation Information',
                     topTitle: true
                   ),
                   EasyStep(
@@ -91,7 +99,7 @@ class ShopInfoScreenState extends State<ShopInfoScreen> {
                         activeStep == 2 ? green1 : Colors.grey.shade400,
                       ),
                     ),
-                    title: 'Tài khoản ngân hàng',
+                    title: 'Bank Account',
                   ),
                   EasyStep(
                     customStep: CircleAvatar(
@@ -103,17 +111,17 @@ class ShopInfoScreenState extends State<ShopInfoScreen> {
                         activeStep == 3 ? green1 : Colors.grey.shade400,
                       ),
                     ),
-                    title: 'Hoàn tất',
+                    title: 'Finish',
                     topTitle: true
                   )
                 ],
               ),
               TextFormField(
                 controller: _shopNameController,
-                decoration: inputDecoration('Tên shop'),
+                decoration: inputDecoration('Shop name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Vui lòng nhập tên shop';
+                    return 'Please enter your shop name';
                   }
                   return null;
                 },
@@ -121,10 +129,10 @@ class ShopInfoScreenState extends State<ShopInfoScreen> {
               const SizedBox(height: 40.0),
               TextFormField(
                 controller: _addressController,
-                decoration: inputDecoration('Địa chỉ lấy hàng'),
+                decoration: inputDecoration('Address'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Vui lòng nhập địa chỉ lấy hàng';
+                    return 'Please enter your address';
                   }
                   return null;
                 },
@@ -139,7 +147,7 @@ class ShopInfoScreenState extends State<ShopInfoScreen> {
                     return 'Vui lòng nhập email';
                   }
                   if (!RegExp(r'^[a-z0-9]+@[a-z]+\.[a-z]+$').hasMatch(value)) {
-                    return 'Email không hợp lệ';
+                    return 'Invalid email';
                   }
                   return null;
                 },
@@ -147,13 +155,13 @@ class ShopInfoScreenState extends State<ShopInfoScreen> {
               const SizedBox(height: 40.0),
               TextFormField(
                 controller: _phoneController,
-                decoration: inputDecoration('Số điện thoại'),
+                decoration: inputDecoration('Phone number'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Vui lòng nhập số điện thoại';
+                    return 'Please enter your phone number';
                   }
                   if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
-                    return 'Số điện thoại không hợp lệ';
+                    return 'Invalid phone number';
                   }
                   return null;
                 },
@@ -161,20 +169,23 @@ class ShopInfoScreenState extends State<ShopInfoScreen> {
               const SizedBox(height: 16.0),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 30,horizontal:60),
-                child: Container(
-                  height: 50,
-                  width:width,
-                  decoration:BoxDecoration(
-                      color: green1,
-                      borderRadius: BorderRadius.circular(50)
+                child: GestureDetector(
+                  onTap: (){
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const FinishSignIn()));
+                    }
+                  },
+                  child: Container(
+                    height: 50,
+                    width:width,
+                    decoration:BoxDecoration(
+                        color: green1,
+                        borderRadius: BorderRadius.circular(50)
+                    ),
+                    child: Center(
+                      child: Text("Next",style:GoogleFonts.almarai(color:Colors.white,fontSize:20,fontWeight: FontWeight.w700),),
+                    ),
                   ),
-                  child: Center(
-                      child: TextButton(
-                        child: Text("Tiếp tục",style:GoogleFonts.almarai(color:Colors.white,fontSize:20,fontWeight: FontWeight.w700),),
-                        onPressed:(){
-                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const FinishSignIn()));
-                        },
-                      )),
                 ),
               ),
             ],
