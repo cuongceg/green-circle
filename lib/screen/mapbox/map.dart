@@ -8,7 +8,6 @@ import 'dart:ui';
 import 'package:green_circle/screen/mapbox/recycling_locations_details.dart';
 import 'package:green_circle/services/database.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class FullMap extends StatefulWidget {
@@ -98,15 +97,9 @@ class _FullMapState extends State<FullMap> {
   void initState() {
     super.initState();
     accessToken =dotenv.env['MAPBOX_TOKEN']??"";
-    tokenkey();
-    createUserGuide();
-    Future.delayed(Duration.zero, showUserGuide);
+
   }
-  String tokenKey = '';
-  Future<void> tokenkey() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    tokenKey = prefs.getString('tokenkey') ?? "";
-  }
+
 
   @override
   void dispose(){
@@ -181,7 +174,8 @@ class _FullMapState extends State<FullMap> {
         )
         );
   }
-  void showUserGuide(){
+  Future<void> showUserGuide() async{
+    createUserGuide();
     tutorialCoachMark.show(context: context);
   }
   void createUserGuide(){
