@@ -66,8 +66,8 @@ class _AddProductState extends State<AddProduct> {
                     icon: const Icon(Icons.image),
                     label: Text("Gallery", style: snackBarFonts,),
                     style: const ButtonStyle(
-                        iconColor: MaterialStatePropertyAll<Color>(Colors.white),
-                        backgroundColor: MaterialStatePropertyAll<Color>(green1)
+                        iconColor: WidgetStatePropertyAll<Color>(Colors.white),
+                        backgroundColor: WidgetStatePropertyAll<Color>(green1)
                     ),
                   ),
                   TextButton.icon(
@@ -77,8 +77,8 @@ class _AddProductState extends State<AddProduct> {
                     icon: const Icon(Icons.camera),
                     label: Text("Camera", style: snackBarFonts,),
                     style: const ButtonStyle(
-                        iconColor: MaterialStatePropertyAll<Color>(Colors.white),
-                        backgroundColor: MaterialStatePropertyAll<Color>(green1)
+                        iconColor: WidgetStatePropertyAll<Color>(Colors.white),
+                        backgroundColor: WidgetStatePropertyAll<Color>(green1)
                     ),),
                 ]
             );
@@ -87,6 +87,7 @@ class _AddProductState extends State<AddProduct> {
     }
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Form(
         key: _formKey,
         child: ListView(
