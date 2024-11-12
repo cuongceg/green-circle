@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green_circle/constants.dart';
+import 'package:green_circle/screen/e_commerce/cart_items.dart';
 import 'package:green_circle/screen/e_commerce/home.dart';
 import 'package:green_circle/screen/e_commerce/search_screen.dart';
 import 'package:green_circle/models/production.dart';
@@ -64,27 +65,9 @@ class _NavBarState extends State<NavBar> {
                 child: IconButton(
                     icon: const Icon(Icons.shopping_cart_outlined,size:25,),
                     onPressed: () {
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => const CartScreen()));
                     }),
               ),
-              badges.Badge(
-                position: badges.BadgePosition.topEnd(top: 0, end: 2),
-                badgeAnimation: const badges.BadgeAnimation.slide(
-                  // disappearanceFadeAnimationDuration: Duration(milliseconds: 200),
-                  // curve: Curves.easeInCubic,
-                ),
-                showBadge: true,
-                badgeStyle: const badges.BadgeStyle(
-                  badgeColor: green1,
-                ),
-                badgeContent:const Text(
-                  "0",
-                  style: TextStyle(color: Colors.white),
-                ),
-                child: IconButton(
-                    icon: Image.asset('assets/images/chat_icon.png',height:25,width: 25,),
-                    onPressed: () {}),
-              )
-
             ],
             bottom: TabBar(
                 labelColor:Colors.white,
