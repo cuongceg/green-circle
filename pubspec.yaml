@@ -63,6 +63,7 @@ dependencies:
   flutter_markdown: ^0.6.20
   flutter_dotenv: ^5.1.0
   easy_stepper: ^0.8.5
+  youtube_player_flutter: ^9.0.4
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,7 @@ import 'package:green_circle/screen/e_commerce/add_product.dart';
 import 'package:green_circle/screen/e_commerce/chat_screen.dart';
 import 'package:green_circle/screen/mapbox/map.dart';
 import 'package:green_circle/screen/e_commerce/profile_screen.dart';
+import 'package:green_circle/screen/scan_screen.dart';
 import 'package:green_circle/widgets/e_commerce/nav_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   List screens = const [
     NavBar(),
     ChatScreen(),
-    AddProduct(),
+    ScanScreen(),
     FullMap(),
     MeScreen(),
   ];
@@ -43,8 +44,8 @@ class _MainScreenState extends State<MainScreen> {
             labelIcon(Icons.home_outlined,0,"Home"),
             labelIcon(Icons.message_outlined ,1,"Chat"),
             Padding(
-              padding: currentTab==2?const EdgeInsets.only(left:5,right:11):const EdgeInsets.only(left:2),
-              child: labelIcon(Icons.add_box_outlined,2,"Add")
+              padding: currentTab==2?const EdgeInsets.only(left:5,right:4):const EdgeInsets.only(left:2),
+              child: labelIcon(Icons.document_scanner_outlined,2,"Scan")
             ),
             Padding(
               padding: currentTab==3?const EdgeInsets.only(left:3,right: 5):const EdgeInsets.only(left:2),
