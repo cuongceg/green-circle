@@ -60,8 +60,8 @@ class _ScanScreenState extends State<ScanScreen> {
                       });
                     },
                     style:const ButtonStyle(
-                        iconColor:MaterialStatePropertyAll<Color>(Colors.white),
-                        backgroundColor:MaterialStatePropertyAll<Color>(green1)
+                        iconColor:WidgetStatePropertyAll<Color>(Colors.white),
+                        backgroundColor:WidgetStatePropertyAll<Color>(green1)
                     ),
                     icon: const Icon(Icons.camera),
                     label: Text("Camera",style:snackBarFonts,),),
@@ -77,40 +77,40 @@ class _ScanScreenState extends State<ScanScreen> {
                       });
                     },
                     style:const ButtonStyle(
-                        iconColor:MaterialStatePropertyAll<Color>(Colors.white),
-                        backgroundColor:MaterialStatePropertyAll<Color>(green1)
+                        iconColor:WidgetStatePropertyAll<Color>(Colors.white),
+                        backgroundColor:WidgetStatePropertyAll<Color>(green1)
                     ),
                     icon: const Icon(Icons.image),
-                    label: Text("Thư viện",style:snackBarFonts,),
+                    label: Text("Gallery",style:snackBarFonts,),
                   ),
                 ),
               ],
             ),
           ),
           Center(
-              child:Container(
-                height:40,
-                width: 285,
-                decoration:BoxDecoration(
-                  color: green1,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Center(
-                  child: TextButton(
-                      onPressed:(){
-                        setState(() {
-                          onPressed=true;
-                          if(index<4){
-                            index++;
-                          }
-                        });
-                        Timer(const Duration(seconds:2), () {
-                          setState(() {
-                            hasResult = true;
-                          });
-                        });
-                      },
-                      child: Text("Check ",style:GoogleFonts.almarai(fontSize:18,color:Colors.white,fontWeight: FontWeight.w700),)
+              child:GestureDetector(
+                onTap: (){
+                  setState(() {
+                    onPressed=true;
+                    if(index<4){
+                      index++;
+                    }
+                  });
+                  Timer(const Duration(seconds:2), () {
+                    setState(() {
+                      hasResult = true;
+                    });
+                  });
+                },
+                child: Container(
+                  height:40,
+                  width: 285,
+                  decoration:BoxDecoration(
+                    color: green1,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Center(
+                    child: Text("Check ",style:GoogleFonts.almarai(fontSize:18,color:Colors.white,fontWeight: FontWeight.w700),),
                   ),
                 ),
               )
