@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:green_circle/constants.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ScanScreen extends StatefulWidget {
   const ScanScreen({super.key});
@@ -14,7 +15,11 @@ class ScanScreen extends StatefulWidget {
 
 class _ScanScreenState extends State<ScanScreen> {
   File? _selectedImage;
-  bool hasResult=false,onPressed=false;
+  bool hasResult=false,onPressed=false,_isPlayerReady=false;
+  late String _initialVideoId;
+  late YoutubePlayerController _controller;
+  late PlayerState _playerState;
+  late YoutubeMetaData _videoMetaData;
   List<String>result=["loại 1","loại 1","loại 3","loại 2","loại 3"];
   List<String>composition=['Nhựa','Kim loại',"Đồ điện tử","Thức ăn","Pin"];
   List<String>suggestion=[
@@ -25,6 +30,49 @@ class _ScanScreenState extends State<ScanScreen> {
     'Bạn có thể cho sản phẩm vào thùng rác nguy hại.'
   ];
   int index=-1;
+
+  @override
+  void initState(){
+    super.initState();
+    _initialVideoId = YoutubePlayer.convertUrlToId('https://www.youtube.com/watch?v=QwwlsCMeSmM&t=22s')!;
+    _controller = YoutubePlayerController(
+        initialVideoId: _initialVideoId,
+        flags: const YoutubePlayerFlags(
+          autoPlay: false,
+          mute: false,
+          disableDragSeek: false,
+          loop: false,
+          isLive: false,
+          forceHD: false,
+          enableCaption: true,
+        )
+    )..addListener(listener);
+    _videoMetaData = const YoutubeMetaData();
+    _playerState = PlayerState.unknown;
+  }
+
+  void listener() {
+    if (_isPlayerReady && mounted && !_controller.value.isFullScreen) {
+      setState(() {
+        _playerState = _controller.value.playerState;
+        _videoMetaData = _controller.metadata;
+      });
+    }
+  }
+
+  @override
+  void deactivate() {
+    // Pauses video while navigating to next page.
+    _controller.pause();
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width=MediaQuery.of(context).size.width;
@@ -120,23 +168,13 @@ class _ScanScreenState extends State<ScanScreen> {
             child: Text("Kết quả :",style:title3Black,),
           ),
           onPressed?hasResult?
-          Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children:[
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical:10,horizontal:10),
-                  child:Text("- Sản phẩm ${result[index]}",style: label,),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top:10,left:10,bottom:5),
-                  child: Text("- Chất liệu sản phẩm : ${composition[index]}",style: label,),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top:10,left:10,bottom:5),
-                  child: Text("- ${suggestion[index]}",style: label,),
-                ),
-              ]
-          ):const Center(
+          YoutubePlayer(
+              controller: _controller,
+              showVideoProgressIndicator: true,
+              progressIndicatorColor: Colors.blueAccent,
+          )
+
+              :const Center(
             child: CircularProgressIndicator(
               color: green1,
               strokeWidth: 4.0,
