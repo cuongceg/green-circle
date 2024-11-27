@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green_circle/constants.dart';
-import 'package:green_circle/screen/e_commerce/cart_items.dart';
+import 'package:green_circle/models/cart_item.dart';
 import 'package:green_circle/screen/e_commerce/home.dart';
 import 'package:green_circle/screen/e_commerce/search_screen.dart';
-import 'package:green_circle/models/production.dart';
 import 'package:badges/badges.dart' as badges;
-import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
+
+import '../../screen/e_commerce/cart_items.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -16,7 +17,6 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  var box = Hive.box<CartItems>('cart_items');
 
   @override
   Widget build(BuildContext context) {
@@ -48,26 +48,31 @@ class _NavBarState extends State<NavBar> {
               ),
             ),
             actions: [
-              badges.Badge(
-                position: badges.BadgePosition.topEnd(top: 0, end: 2),
-                badgeAnimation: const badges.BadgeAnimation.slide(
-                  // disappearanceFadeAnimationDuration: Duration(milliseconds: 200),
-                  // curve: Curves.easeInCubic,
-                ),
-                showBadge: true,
-                badgeStyle: const badges.BadgeStyle(
-                  badgeColor: green1,
-                ),
-                badgeContent:Text(
-                  "${box.length}",
-                  style: const TextStyle(color: Colors.white),
-                ),
-                child: IconButton(
-                    icon: const Icon(Icons.shopping_cart_outlined,size:25,),
-                    onPressed: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => const CartScreen()));
-                    }),
-              ),
+              Consumer<CartItemProvider>(
+                builder: (context,cartItemProvider,child){
+                  final carts= cartItemProvider.cartItems;
+                  return badges.Badge(
+                    position: badges.BadgePosition.topEnd(top: 0, end: 2),
+                    badgeAnimation: const badges.BadgeAnimation.slide(
+                      // disappearanceFadeAnimationDuration: Duration(milliseconds: 200),
+                      // curve: Curves.easeInCubic,
+                    ),
+                    showBadge: true,
+                    badgeStyle: const badges.BadgeStyle(
+                      badgeColor: green1,
+                    ),
+                    badgeContent:Text(
+                      "${carts.length}",
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    child: IconButton(
+                        icon: const Icon(Icons.shopping_cart_outlined,size:25,),
+                        onPressed: () {
+                          Navigator.push(context,MaterialPageRoute(builder: (context) => const CartScreen()));
+                        }),
+                  );
+                },
+              )
             ],
             bottom: TabBar(
                 labelColor:Colors.white,
