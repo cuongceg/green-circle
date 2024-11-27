@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
-import 'package:green_circle/screen/e_commerce/add_product.dart';
 import 'package:green_circle/screen/e_commerce/chat_screen.dart';
-import 'package:green_circle/screen/mapbox/map.dart';
 import 'package:green_circle/screen/e_commerce/profile_screen.dart';
+import 'package:green_circle/screen/mapbox/map.dart';
 import 'package:green_circle/screen/scan_screen.dart';
 import 'package:green_circle/widgets/e_commerce/nav_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,8 +22,6 @@ class _MainScreenState extends State<MainScreen> {
     FullMap(),
     MeScreen(),
   ];
-
-
 
   @override
   Widget build(BuildContext context) {
