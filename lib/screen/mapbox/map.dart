@@ -33,11 +33,11 @@ class _FullMapState extends State<FullMap> {
     controller.onSymbolTapped.add(_onSymbolTapped);
   }
 
-  _showBottomModalSheet(String name){
+  _showBottomModalSheet(String name,LatLng destination){
     showModalBottomSheet(
         context: context,
         builder:(BuildContext context){
-          return RecyclingLocationDetail(name: name,mapController: mapController,existingLine: existingLine,);
+          return RecyclingLocationDetail(name: name,mapController: mapController,existingLine: existingLine,destination: destination,);
         });
   }
 
@@ -48,56 +48,79 @@ class _FullMapState extends State<FullMap> {
         CameraPosition(
           target:symbolPos,
           zoom:15,
-          tilt: 270.0,
         )
       ));
     }
-    _showBottomModalSheet(symbol.options.textField??'');
+    _showBottomModalSheet(symbol.options.textField??'',symbol.options.geometry??const LatLng(0,0));
   }
 
   void _onStyleLoaded()async{
     mapController.addSymbol(
-      const SymbolOptions(
-        geometry:LatLng(21.004721, 105.844047),
-        iconImage:"assets/images/cart_icon.png",
-        iconColor:"#5CAF56",
-        iconSize:1.7,
-        textField:"Green Recycling Location Facility 1",
-        textColor:"#5CAF56",
-        textSize:10,
-        iconOffset:Offset(0,-9)
-      )
+        const SymbolOptions(
+            geometry:LatLng(21.004721, 105.844047),
+            iconImage:"assets/images/shopping-basket.png",
+            iconColor: "#000000",
+            iconSize:0.2,
+            textField:"Green Recycling Location Facility 1",
+            textColor:"#000000",
+            textSize:10,
+            iconOffset:Offset(0,-150)
+        )
     );
     mapController.addSymbol(
         const SymbolOptions(
             geometry:LatLng(20.981340, 105.853674),
-            iconImage:"assets/images/cart_icon.png",
-            iconColor:"#5CAF56",
-            iconSize:1.7,
+            iconImage:"assets/images/shopping-basket.png",
+            iconColor: "#000000",
+            iconSize:0.2,
             textField:"Green Recycling Location Facility 2",
-            textColor:"#5CAF56",
+            textColor:"#000000",
             textSize:10,
-            iconOffset:Offset(0,-9)
+            iconOffset:Offset(0,-150)
         )
     );
     mapController.addSymbol(
         const SymbolOptions(
             geometry:LatLng(20.963949, 105.831959),
-            iconImage:"assets/images/cart_icon.png",
-            iconColor:"#5CAF56",
-            iconSize:1.7,
+            iconImage:"assets/images/shopping-basket.png",
+            iconColor: "#000000",
+            iconSize:0.2,
             textField:"Green Recycling Location Facility 3",
-            textColor:"#5CAF56",
+            textColor:"#000000",
             textSize:10,
-            iconOffset:Offset(0,-9)
+            iconOffset:Offset(0,-150)
+        )
+    );
+    mapController.addSymbol(
+        const SymbolOptions(
+            geometry:LatLng(21.083775, 105.863317),
+            iconImage:"assets/images/shopping-basket.png",
+            iconColor: "#000000",
+            iconSize:0.2,
+            textField:"Green Recycling Location Facility 4",
+            textColor:"#000000",
+            textSize:10,
+            iconOffset:Offset(0,-150)
+        )
+    );
+    mapController.addSymbol(
+        const SymbolOptions(
+            geometry:LatLng(21.037164, 105.782985),
+            iconImage:"assets/images/shopping-basket.png",
+            iconColor: "#000000",
+            iconSize:0.2,
+            textField:"Green Recycling Location Facility 5",
+            textColor:"#000000",
+            textSize:10,
+            iconOffset:Offset(0,-150)
         )
     );
   }
+
   @override
   void initState() {
     super.initState();
     accessToken =dotenv.env['MAPBOX_TOKEN']??"";
-
   }
 
 
@@ -118,7 +141,7 @@ class _FullMapState extends State<FullMap> {
                   height: MediaQuery.of(context).size.height,
                   child: MapboxMap(
                     accessToken: accessToken,
-                    initialCameraPosition: const CameraPosition(target: LatLng(21.005000,105.844920),zoom:17,tilt: 270.0,),
+                    initialCameraPosition: const CameraPosition(target: LatLng(21.001531, 105.840292),zoom:14,tilt: 0.0,),
                     onMapCreated: _onMapCreated,
                     onStyleLoadedCallback: _onStyleLoaded,
                     gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
@@ -157,7 +180,21 @@ class _FullMapState extends State<FullMap> {
                           key: locationButton,
                           icon:const Icon(Icons.location_on,color:green1,size:35,),
                           onPressed: () {
-                            mapController.animateCamera(CameraUpdate.zoomBy(-3));
+                            mapController.addSymbol(
+                                const SymbolOptions(
+                                    geometry:LatLng(20.980339,105.844655),
+                                    iconImage:"assets/images/gps.png",
+                                    iconColor: "#000000",
+                                    iconSize:0.2,
+                                    iconOffset:Offset(0,-150)
+                                )
+                            );
+                            mapController.animateCamera(CameraUpdate.newCameraPosition(
+                                const CameraPosition(
+                                  target:LatLng(20.980339,105.844655),
+                                  zoom:15,
+                                )
+                            ));
                           }
                       ),
                       IconButton(
@@ -192,26 +229,6 @@ class _FullMapState extends State<FullMap> {
 
   List<TargetFocus> _createdTargets(){
     List<TargetFocus> targets = [];
-    targets.add(
-      TargetFocus(
-        identify: "directionButton",
-        keyTarget: directionButton,
-        alignSkip: Alignment.topRight,
-        enableOverlayTab: true,
-        contents: [
-          TargetContent(
-            align: ContentAlign.left,
-            builder: (context, controller) {
-              return Text(
-                  "Get directions to nearest recycling location",
-                  style:textStyle,
-              );
-            },
-          ),
-        ],
-      ),
-    );
-
     targets.add(
       TargetFocus(
         identify: "locationButton",
