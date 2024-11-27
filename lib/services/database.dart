@@ -233,78 +233,9 @@ class Database{
       return null;
     }
   }
-  Future<double> getLocation1Path(MapboxMapController mapController,List<Line> existingLines)async{
-    String url ="https://api.mapbox.com/directions/v5/mapbox/driving/105.844920,21.005000;105.844655,20.980339?geometries=geojson&access_token=pk.eyJ1IjoidGh1Y2t1YmluIiwiYSI6ImNsbTYxYzJ1azB2MjQzcHA0NGR0YnIxMTUifQ.88hO1oKIFSZsljzkR2vP8w";
-  try{
-    Dio().options.contentType=Headers.jsonContentType;
-    Response<Map<String,dynamic>> responseData= await Dio().get<Map<String,dynamic>>(url);
-    debugPrint('${responseData.statusCode}');
-    if(responseData.statusCode==200){
-      Map<String,dynamic>? data=responseData.data;
-      if(data!=null){
-        List<dynamic> routes=data['routes'];
-        List<LatLng> coordinates = routes.expand((route) {
-          List<dynamic> geometryCoordinates = route['geometry']['coordinates'];
-          return geometryCoordinates.map((coordinate) => LatLng(coordinate[1], coordinate[0])); // Reversed for LatLng format
-        }).toList();
-        for(Line line in existingLines){
-          mapController.removeLine(line);
-        }
-        existingLines.clear();
-        Line newLine = await mapController.addLine(
-            LineOptions(
-                geometry: coordinates,
-                lineColor: "#5CAF56",
-                lineWidth:4.0,
-                lineJoin:'round'
-            )
-        );
-        existingLines.add(newLine);
-        return routes[0]['distance'].toDouble();
-      }
-    }
-    return 0;
-  }catch(e){
-    debugPrint("Error fetching shortest path: $e");
-    return 0;
-  }
-  }
-  Future getLocation2Path(MapboxMapController mapController,List<Line> existingLines)async{
-    String url ="https://api.mapbox.com/directions/v5/mapbox/driving/105.853674,20.981340;105.844655,20.980339?geometries=geojson&access_token=pk.eyJ1IjoidGh1Y2t1YmluIiwiYSI6ImNsbTYxYzJ1azB2MjQzcHA0NGR0YnIxMTUifQ.88hO1oKIFSZsljzkR2vP8w";
-    try{
-      Dio().options.contentType=Headers.jsonContentType;
-      Response<Map<String,dynamic>> responseData= await Dio().get<Map<String,dynamic>>(url);
-      debugPrint('${responseData.statusCode}');
-      if(responseData.statusCode==200){
-        Map<String,dynamic>? data=responseData.data;
-        if(data!=null){
-          List<dynamic> routes=data['routes'];
-          List<LatLng> coordinates = routes.expand((route) {
-            List<dynamic> geometryCoordinates = route['geometry']['coordinates'];
-            return geometryCoordinates.map((coordinate) => LatLng(coordinate[1], coordinate[0])); // Reversed for LatLng format
-          }).toList();
-          for(Line line in existingLines){
-            mapController.removeLine(line);
-          }
-          existingLines.clear();
-          Line newLine = await mapController.addLine(
-              LineOptions(
-                  geometry: coordinates,
-                  lineColor: "#5CAF56",
-                  lineWidth:4.0,
-                  lineJoin:'round'
-              )
-          );
-          existingLines.add(newLine);
-        }
-      }
-    }catch(e){
-      debugPrint("Error fetching shortest path: $e");
-      return null;
-    }
-  }
-  Future getLocation3Path(MapboxMapController mapController,List<Line>existingLines)async{
-    String url ="https://api.mapbox.com/directions/v5/mapbox/driving/105.831959,20.963949;105.844655,20.980339?geometries=geojson&access_token=pk.eyJ1IjoidGh1Y2t1YmluIiwiYSI6ImNsbTYxYzJ1azB2MjQzcHA0NGR0YnIxMTUifQ.88hO1oKIFSZsljzkR2vP8w";
+
+  Future getDirection(MapboxMapController mapController,List<Line>existingLines,LatLng destination)async{
+    String url ="https://api.mapbox.com/directions/v5/mapbox/driving/${destination.longitude},${destination.latitude};105.844655,20.980339?geometries=geojson&access_token=pk.eyJ1IjoidGh1Y2t1YmluIiwiYSI6ImNsbTYxYzJ1azB2MjQzcHA0NGR0YnIxMTUifQ.88hO1oKIFSZsljzkR2vP8w";
     try{
       Dio().options.contentType=Headers.jsonContentType;
       Response<Map<String,dynamic>> responseData= await Dio().get<Map<String,dynamic>>(url);
