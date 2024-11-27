@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:green_circle/constants.dart';
+import 'package:green_circle/models/cart_item.dart';
 import 'package:green_circle/models/production.dart';
 import 'package:green_circle/screen/e_commerce/check_out_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 
 class AddToCart extends StatefulWidget {
   final Product product;
@@ -14,7 +15,6 @@ class AddToCart extends StatefulWidget {
 }
 
 class _AddToCartState extends State<AddToCart> {
-  var box = Hive.box<CartItems>('cart_items');
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -107,28 +107,21 @@ class _AddToCartState extends State<AddToCart> {
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.symmetric(horizontal:10),
-                                          child: Container(
-                                            height: 45,
-                                            width: width-20,
-                                            color: green1,
-                                            child: Center(
-                                                child: TextButton(
-                                                  child: Text("Add cart",style:GoogleFonts.almarai(color:Colors.white,fontSize:20),),
-                                                  onPressed:(){
-                                                    CartItems cartItems=CartItems(
-                                                        productId: widget.product.productId,
-                                                        price: widget.product.price,
-                                                        imageUrl: widget.product.image[0],
-                                                        title: widget.product.title,
-                                                        category: widget.product.category.title,
-                                                        quantity: currentNumber);
-                                                    box.add(cartItems);
-                                                    debugPrint(box.length.toString());
-                                                    Navigator.pop(context);
-                                                  },
-                                                )),
+                                          child: GestureDetector(
+                                            onTap:(){
+                                              final cartItem = CartItem(quantity: currentNumber, product: widget.product);
+                                              Provider.of<CartItemProvider>(context,listen: false).addCartItem(cartItem);
+                                              Navigator.pop(context);
+                                            },
+                                            child: Container(
+                                              height: 45,
+                                              width: width-20,
+                                              color: green1,
+                                              child: Center(child: Text("Add to cart",style:GoogleFonts.almarai(color:Colors.white,fontSize:20),)
+                                            ),
                                           ),
-                                        )
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   );
