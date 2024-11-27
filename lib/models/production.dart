@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:green_circle/models/category.dart';
-import 'package:hive/hive.dart';
 
 class Product {
   double price, rate;
   int likedNumber, purchasesNumber,remain;
   bool onSale;
+  bool isFavorite = false;
   final String title, description,label,productId;
   final List<String> image;
   final Category category;
@@ -56,86 +57,22 @@ class Product {
       'category': category.toJson(),
     };
   }
-
-}
-class FavorProducts extends HiveObject{
-  @HiveField(0)
-  String imageUrl;
-  @HiveField(1)
-  double price;
-  @HiveField(2)
-  String productId;
-  @HiveField(3)
-  String title;
-  @HiveField(4)
-  int favorNumbers;
-  FavorProducts({required this.productId,required this.price,required this.imageUrl,required this.title,required this.favorNumbers});
 }
 
-class FavorProductsAdapter extends TypeAdapter<FavorProducts> {
-  @override
-  final int typeId = 0; // Unique identifier for the type
+class ProductProvider with ChangeNotifier{
+  List<Product> _products = [];
+  List<Product> get products => _products;
 
-  @override
-  FavorProducts read(BinaryReader reader) {
-    return FavorProducts(
-      productId: reader.readString(),
-      price: reader.readDouble(),
-      imageUrl: reader.readString(),
-      title: reader.readString(),
-      favorNumbers: reader.readInt(),
-    );
+  void setProducts(List<Product> products){
+    _products = products;
+    notifyListeners();
   }
 
-  @override
-  void write(BinaryWriter writer, FavorProducts obj) {
-    writer.writeString(obj.productId);
-    writer.writeDouble(obj.price);
-    writer.writeString(obj.imageUrl);
-    writer.writeString(obj.title);
-    writer.writeInt(obj.favorNumbers);
-  }
-}
-
-class CartItems extends HiveObject{
-  @HiveField(0)
-  String imageUrl;
-  @HiveField(1)
-  double price;
-  @HiveField(2)
-  String productId;
-  @HiveField(3)
-  String title;
-  @HiveField(4)
-  int quantity;
-  @HiveField(5)
-  String category;
-  CartItems({required this.productId,required this.price,required this.imageUrl,required this.title,required this.quantity,required this.category});
-}
-
-class CartItemsAdapter extends TypeAdapter<CartItems> {
-  @override
-  final int typeId = 1; // Unique identifier for the type
-
-  @override
-  CartItems read(BinaryReader reader) {
-    return CartItems(
-      productId: reader.readString(),
-      price: reader.readDouble(),
-      imageUrl: reader.readString(),
-      title: reader.readString(),
-      quantity: reader.readInt(),
-      category: reader.readString(),
-    );
-  }
-
-  @override
-  void write(BinaryWriter writer, CartItems obj) {
-    writer.writeString(obj.productId);
-    writer.writeDouble(obj.price);
-    writer.writeString(obj.imageUrl);
-    writer.writeString(obj.title);
-    writer.writeInt(obj.quantity);
-    writer.writeString(obj.category);
+  void toggleFavoriteStatus(String title){
+    final index = _products.indexWhere((product) => product.title == title);
+    if(index != -1){
+      _products[index].isFavorite = !_products[index].isFavorite;
+      notifyListeners();
+    }
   }
 }

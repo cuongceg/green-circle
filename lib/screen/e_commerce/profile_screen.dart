@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:green_circle/screen/e_commerce/add_product.dart';
+import 'package:green_circle/screen/e_commerce/like_product_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,8 +12,6 @@ import 'package:green_circle/services/auth_services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:green_circle/models/production.dart';
-
-import '../user shop/create_shop.dart';
 
 class MeScreen extends StatefulWidget {
   const MeScreen({Key? key}) : super(key: key);
@@ -418,88 +418,32 @@ class _MeScreenState extends State<MeScreen> {
                     ),
                     TextButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const ShopInfoScreen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const AddProduct()));
                         },
                         child: const Text('Explore shop',style:TextStyle(fontSize:15,color: green1),)
                     )
                   ],
                 ),
-                const SizedBox(height: 20),
-                const Text(
-                  "My Purchases",
-                  style: TextStyle(
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: green5,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: const Text(
-                        "To Pay",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: green1,
-                        ),
+                    const Text(
+                      "My favourite products",
+                      style: TextStyle(
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: green5,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: const Text(
-                        "To Ship",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: green1,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: green5,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: const Text(
-                        "To Receive",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: green1,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: green5,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: const Text(
-                        "To Rate",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: green1,
-                        ),
-                      ),
-                    ),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const LikeProductScreen()));
+                        },
+                        child: const Text('Explore products',style:TextStyle(fontSize:15,color: green1),)
+                    )
                   ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 const Text(
                   "Buy Again",
                   style: TextStyle(
@@ -528,17 +472,17 @@ class _MeScreenState extends State<MeScreen> {
                   child: TextButton.icon(
                     style: const ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll<Color>(green1),
-                      fixedSize: WidgetStatePropertyAll<Size>(Size(285, 55)),
+                      fixedSize: WidgetStatePropertyAll<Size>(Size(200,40)),
                     ),
                     icon: const Icon(
                       Icons.logout,
                       color: Colors.white,
-                      size: 30,
+                      size: 20,
                     ),
                     label: Text(
                       "Sign out",
                       style: GoogleFonts.almarai(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
                       ),
