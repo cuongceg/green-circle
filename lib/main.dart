@@ -10,9 +10,10 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+import 'models/cart_item.dart';
 
 void main() async{
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -35,11 +36,6 @@ void main() async{
       appleProvider: AppleProvider.debug,
     );
   }
-  await Hive.initFlutter();
-  Hive.registerAdapter(FavorProductsAdapter());
-  await Hive.openBox<FavorProducts>('favourite_products');
-  Hive.registerAdapter(CartItemsAdapter());
-  await Hive.openBox<CartItems>('cart_items');
   await dotenv.load(fileName: "assets/.env");
   if(dotenv.env['GEMINI_TOKEN']!=null){
     Gemini.init(apiKey: dotenv.env['GEMINI_TOKEN']??"");
@@ -57,12 +53,24 @@ class MyApp extends StatelessWidget {
         StreamProvider<MyUser?>.value(value: AuthService().user, initialData:null),
         StreamProvider<List<UserInformation>?>.value(value: Database().authData, initialData:null),
         StreamProvider<List<Product>?>.value(value: Database().productData, initialData:null),
+        ChangeNotifierProvider(create: (_) => ProductProvider()),
+        ChangeNotifierProvider(create: (_) => CartItemProvider()),
       ],
-      child:const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: WelcomePage(),
+      child: Consumer<List<Product>?>(
+        builder: (context, products, child) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (products != null) {
+              Provider.of<ProductProvider>(context, listen: false).setProducts(products);
+            }
+          });
+          return const MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: WelcomePage(),
+          );
+        },
       ),
     );
   }
 }
+
 
