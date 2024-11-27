@@ -15,28 +15,50 @@ class ScanScreen extends StatefulWidget {
 
 class _ScanScreenState extends State<ScanScreen> {
   File? _selectedImage;
-  bool hasResult=false,onPressed=false,_isPlayerReady=false;
+  bool hasResult=false,onPressed=false;
+  final _isPlayerReady = false;
   late String _initialVideoId;
+  late String _initialVideoId2;
+  late String _initialVideoId3;
   late YoutubePlayerController _controller;
+  late YoutubePlayerController _controller2;
+  late YoutubePlayerController _controller3;
   late PlayerState _playerState;
   late YoutubeMetaData _videoMetaData;
-  List<String>result=["loại 1","loại 1","loại 3","loại 2","loại 3"];
-  List<String>composition=['Nhựa','Kim loại',"Đồ điện tử","Thức ăn","Pin"];
-  List<String>suggestion=[
-    'Bạn có thể cho sản phẩm vào thùng rác tái chế.',
-    'Bạn có thể cho sản phẩm vào thùng rác tái chế.',
-    'Bạn có thể cho sản phẩm vào thùng rác nguy hại.',
-    'Bạn có thể cho sản phẩm vào thùng rác hữu cơ.',
-    'Bạn có thể cho sản phẩm vào thùng rác nguy hại.'
-  ];
   int index=-1;
 
   @override
   void initState(){
     super.initState();
     _initialVideoId = YoutubePlayer.convertUrlToId('https://www.youtube.com/watch?v=QwwlsCMeSmM&t=22s')!;
+    _initialVideoId2 = YoutubePlayer.convertUrlToId('https://www.youtube.com/watch?v=Tzi_uTNT9_E')!;
+    _initialVideoId3 = YoutubePlayer.convertUrlToId('https://www.youtube.com/watch?v=N4aT-mN8Bb8')!;
     _controller = YoutubePlayerController(
         initialVideoId: _initialVideoId,
+        flags: const YoutubePlayerFlags(
+          autoPlay: false,
+          mute: false,
+          disableDragSeek: false,
+          loop: false,
+          isLive: false,
+          forceHD: false,
+          enableCaption: true,
+        )
+    )..addListener(listener);
+    _controller2 = YoutubePlayerController(
+        initialVideoId: _initialVideoId2,
+        flags: const YoutubePlayerFlags(
+          autoPlay: false,
+          mute: false,
+          disableDragSeek: false,
+          loop: false,
+          isLive: false,
+          forceHD: false,
+          enableCaption: true,
+        )
+    )..addListener(listener);
+    _controller3 = YoutubePlayerController(
+        initialVideoId: _initialVideoId3,
         flags: const YoutubePlayerFlags(
           autoPlay: false,
           mute: false,
@@ -62,7 +84,6 @@ class _ScanScreenState extends State<ScanScreen> {
 
   @override
   void deactivate() {
-    // Pauses video while navigating to next page.
     _controller.pause();
     super.deactivate();
   }
@@ -77,6 +98,7 @@ class _ScanScreenState extends State<ScanScreen> {
   Widget build(BuildContext context) {
     double width=MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.white,
       body:Column(
         mainAxisAlignment:MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,7 +162,7 @@ class _ScanScreenState extends State<ScanScreen> {
                 onTap: (){
                   setState(() {
                     onPressed=true;
-                    if(index<4){
+                    if(index<0){
                       index++;
                     }
                   });
@@ -163,17 +185,62 @@ class _ScanScreenState extends State<ScanScreen> {
                 ),
               )
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical:10,horizontal:10),
-            child: Text("Kết quả :",style:title3Black,),
-          ),
+          const SizedBox(height: 20,),
           onPressed?hasResult?
-          YoutubePlayer(
-              controller: _controller,
-              showVideoProgressIndicator: true,
-              progressIndicatorColor: Colors.blueAccent,
+          Expanded(
+              child: ListView(
+                padding: const EdgeInsets.only(top: 0),
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom:5,left:10),
+                    child: Text("Ban dang co:",style:title3Black,),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom : 5,left:15),
+                    child: Text("- 2 chai nhua\n- 6 nap chai",style:label,),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom:10,left:10),
+                    child: Text("San pham 1: Xe o to lam tu vo chai tai che",style:title3Black,),
+                  ),
+                  YoutubePlayer(
+                    controller: _controller,
+                    showVideoProgressIndicator: true,
+                    progressIndicatorColor: Colors.blueAccent,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top:5,bottom : 5,left:15),
+                    child: Text("Ban con thieu\n- 2 day chun\n- 1 lo xo\n- 3 thanh tre",style:label,),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom:10,left:10),
+                    child: Text("San pham 2: Heo tiet kiem lam tu vo chai tai che",style:title3Black,),
+                  ),
+                  YoutubePlayer(
+                    controller: _controller3,
+                    showVideoProgressIndicator: true,
+                    progressIndicatorColor: Colors.blueAccent,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top:5,bottom : 5,left:15),
+                    child: Text("Ban con thieu\n- 4 mieng vai mau\n- Vai len\n- 2 tam nhua cung",style:label,),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom:10,left:10),
+                    child: Text("San pham 3: Den pin lam tu vo chai tai che",style:title3Black,),
+                  ),
+                  YoutubePlayer(
+                    controller: _controller2,
+                    showVideoProgressIndicator: true,
+                    progressIndicatorColor: Colors.blueAccent,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top:5,bottom : 5,left:15),
+                    child: Text("Ban con thieu\n- 6 day dien\n- 1 nut bam\n- 1 bong den\n - 1 cuc pin",style:label,),
+                  ),
+                ],
+              )
           )
-
               :const Center(
             child: CircularProgressIndicator(
               color: green1,
